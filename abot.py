@@ -1,12 +1,16 @@
 import json
 import random
+import time
+import os
 
 import telebot
 from telebot import types
+from flask import Flask, request
 
+TOKEN = '957965875:AAGriDg9e0ZR9SbYsqCr3GE3Vu9osC6BDKw'
 
-bot = telebot.TeleBot('957965875:AAGriDg9e0ZR9SbYsqCr3GE3Vu9osC6BDKw')
-
+bot = telebot.TeleBot(TOKEN)
+server = Flask(__name__)
 
 keyboard_main = types.InlineKeyboardMarkup()
 keyboard_main.add(types.InlineKeyboardButton(text='Доступный функционал', callback_data='to_menu_menu'))
@@ -122,4 +126,11 @@ def sticker_id_reply(message):
         bot.send_message(message.chat.id, text='В предыдущее меню', reply_markup=keyboard_back_to_main_menu)
 
 
-bot.polling(none_stop=True, interval=0)
+if __name__ == "__main__":
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+
+while True:
+    try:
+        bot.polling(none_stop=True)
+    except Exception:
+        time.sleep(15)
