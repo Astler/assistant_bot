@@ -1,1 +1,1 @@
-worker: python abot.py
+web: python abot.py runserver 0.0.0.0:5000
