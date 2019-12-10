@@ -1,3 +1,5 @@
+telebot
+telegram
 appdirs==1.4.3
 certifi==2018.1.18
 Cython==0.23

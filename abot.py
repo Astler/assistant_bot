@@ -1,10 +1,37 @@
 import json
+import logging
+import os
 import random
 
 import telebot
 from telebot import types
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 bot = telebot.TeleBot('957965875:AAGriDg9e0ZR9SbYsqCr3GE3Vu9osC6BDKw')
+
+if __name__ == "__main__":
+    # Set these variable to the appropriate values
+    TOKEN = "Your token from @Botfather"
+    NAME = "The name of your app on Heroku"
+
+    # Port is given by Heroku
+    PORT = os.environ.get('PORT')
+
+    # Enable logging
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                        level=logging.INFO)
+    logger = logging.getLogger(__name__)
+
+    # Set up the Updater
+    updater = Updater(TOKEN)
+    dp = updater.dispatcher
+
+    # Start the webhook
+    updater.start_webhook(listen="0.0.0.0",
+                          port=int(PORT),
+                          url_path=TOKEN)
+    updater.bot.setWebhook("https://{}.herokuapp.com/{}".format(NAME, TOKEN))
+    updater.idle()
 
 keyboard_main = types.InlineKeyboardMarkup()
 keyboard_main.add(types.InlineKeyboardButton(text='Доступный функционал', callback_data='to_menu_menu'))
@@ -115,6 +142,5 @@ def sticker_id_reply(message):
         msg = bot.send_message(message.chat.id, "Попробуем снова. Кидай свой стикер...")
         bot.register_next_step_handler(msg, sticker_id_reply)
         bot.send_message(message.chat.id, text='В предыдущее меню', reply_markup=keyboard_back_to_main_menu)
-
 
 bot.polling(none_stop=True, interval=0)
