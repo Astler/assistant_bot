@@ -4,7 +4,9 @@ import random
 import telebot
 from telebot import types
 
+
 bot = telebot.TeleBot('957965875:AAGriDg9e0ZR9SbYsqCr3GE3Vu9osC6BDKw')
+
 
 keyboard_main = types.InlineKeyboardMarkup()
 keyboard_main.add(types.InlineKeyboardButton(text='Доступный функционал', callback_data='to_menu_menu'))
