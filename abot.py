@@ -5,33 +5,8 @@ import random
 
 import telebot
 from telebot import types
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 bot = telebot.TeleBot('957965875:AAGriDg9e0ZR9SbYsqCr3GE3Vu9osC6BDKw')
-
-if __name__ == "__main__":
-    # Set these variable to the appropriate values
-    TOKEN = "Your token from @Botfather"
-    NAME = "The name of your app on Heroku"
-
-    # Port is given by Heroku
-    PORT = os.environ.get('PORT')
-
-    # Enable logging
-    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                        level=logging.INFO)
-    logger = logging.getLogger(__name__)
-
-    # Set up the Updater
-    updater = Updater(TOKEN)
-    dp = updater.dispatcher
-
-    # Start the webhook
-    updater.start_webhook(listen="0.0.0.0",
-                          port=int(PORT),
-                          url_path=TOKEN)
-    updater.bot.setWebhook("https://{}.herokuapp.com/{}".format(NAME, TOKEN))
-    updater.idle()
 
 keyboard_main = types.InlineKeyboardMarkup()
 keyboard_main.add(types.InlineKeyboardButton(text='Доступный функционал', callback_data='to_menu_menu'))
@@ -86,7 +61,8 @@ def get_text_messages(message):
         bot.send_sticker(message.from_user.id, "CAADAgADkQADIIAaInNnqBJmYzqtFgQ")
         bot.send_message(message.from_user.id, text='Нужна помощь? С чем? Такс, ладно, все, что я пока могу — можешь '
                                                     'увидеть тут. Это же меню можно вызвать в любое время написав '
-                                                    'слово Меню (можно меню, menu). Обращайся)', reply_markup=keyboard_main)
+                                                    'слово Меню (можно меню, menu). Обращайся)',
+                         reply_markup=keyboard_main)
     elif message.text == "Пока":
         bot.send_sticker(message.from_user.id, "CAADAgADeAADIIAaIgUnNYxeyPi0FgQ")
     elif lowerText == "даша":
@@ -114,7 +90,8 @@ def callback_worker(call):
         bot.send_message(call.message.chat.id, text='Мы сотворим великие дела!', reply_markup=keyboard_tech)
     elif call.data == "info_menu":
         bot.send_sticker(call.message.chat.id, "CAADAgADmQADIIAaIm0iFncDb2l8FgQ")
-        bot.send_message(call.message.chat.id, text='Тут будет что-то скоро, но автор был слишком занят...', reply_markup=keyboard_back_to_menu_menu)
+        bot.send_message(call.message.chat.id, text='Тут будет что-то скоро, но автор был слишком занят...',
+                         reply_markup=keyboard_back_to_menu_menu)
     elif call.data == "to_main_menu":
         bot.clear_step_handler(call.message)
         bot.send_sticker(call.message.chat.id, "CAADAgADnQADIIAaIo5Vgyzp5HU0FgQ")
@@ -122,7 +99,8 @@ def callback_worker(call):
     elif call.data == "to_menu_menu":
         bot.clear_step_handler(call.message)
         bot.send_sticker(call.message.chat.id, "CAADAgADhQADIIAaInGPMZyAFM_yFgQ")
-        bot.send_message(call.message.chat.id, text='Ну я пока бот в развитии, так что многого не жди...', reply_markup=keyboard_menu)
+        bot.send_message(call.message.chat.id, text='Ну я пока бот в развитии, так что многого не жди...',
+                         reply_markup=keyboard_menu)
 
 
 def sticker_id_reply(message):
@@ -142,5 +120,6 @@ def sticker_id_reply(message):
         msg = bot.send_message(message.chat.id, "Попробуем снова. Кидай свой стикер...")
         bot.register_next_step_handler(msg, sticker_id_reply)
         bot.send_message(message.chat.id, text='В предыдущее меню', reply_markup=keyboard_back_to_main_menu)
+
 
 bot.polling(none_stop=True, interval=0)
