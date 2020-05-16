@@ -6,7 +6,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Callb
 
 import logging
 
-TOKEN = '957965875:AAGriDg9e0ZR9SbYsqCr3GE3Vu9osC6BDKw'
+TOKEN = "idk"
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
