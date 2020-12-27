@@ -1,10 +1,12 @@
 import random
 import logging
 import random
+from abc import ABCMeta
+from typing import Optional, Union, Dict
 
 import apiai
 import json
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryHandler, BaseFilter
 from telethon.sync import TelegramClient
 
@@ -25,13 +27,13 @@ dispatcher = updater.dispatcher
 jobs = updater.job_queue
 
 
-class OrFilter(BaseFilter):
+class OrFilter(BaseFilter, metaclass=ABCMeta):
     def filter(self, message):
         lowerText = str(message.text).lower()
         return lowerText.__contains__('или') & lowerText.startswith("эш")
 
 
-class WhoIsFilter(BaseFilter):
+class WhoIsFilter(BaseFilter, metaclass=ABCMeta):
     def filter(self, message):
         lowerText = str(message.text).lower()
         return (lowerText.__contains__('кто сегодня')) & lowerText.startswith(
@@ -39,6 +41,9 @@ class WhoIsFilter(BaseFilter):
 
 
 class AsheFilter(BaseFilter):
+    def __call__(self, update: Update) -> Optional[Union[bool, Dict]]:
+        pass
+
     def filter(self, message):
         lowerText = str(message.text).lower()
         return lowerText.startswith('эш')
