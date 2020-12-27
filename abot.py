@@ -28,12 +28,18 @@ jobs = updater.job_queue
 
 
 class OrFilter(BaseFilter, metaclass=ABCMeta):
+    def __call__(self, update: Update) -> Optional[Union[bool, Dict]]:
+        pass
+
     def filter(self, message):
         lowerText = str(message.text).lower()
         return lowerText.__contains__('или') & lowerText.startswith("эш")
 
 
 class WhoIsFilter(BaseFilter, metaclass=ABCMeta):
+    def __call__(self, update: Update) -> Optional[Union[bool, Dict]]:
+        pass
+
     def filter(self, message):
         lowerText = str(message.text).lower()
         return (lowerText.__contains__('кто сегодня')) & lowerText.startswith(
