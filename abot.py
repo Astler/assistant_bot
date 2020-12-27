@@ -188,7 +188,8 @@ def textFormat(update, context):
 
     text_formatted_text = ' '.join(arguments)
 
-    text_formatted_text = text_formatted_text.replace(" ,", ",").replace(" .", ".").replace("(c)", "©").replace("(r)", "®")
+    text_formatted_text = text_formatted_text.replace(" ,", ",").replace(" .", ".").replace("(c)", "©").replace("(r)",
+                                                                                                                "®")
 
     context.bot.send_message(chat_id=update.effective_chat.id, text=text_formatted_text)
 
@@ -211,6 +212,7 @@ text_format_handler = CommandHandler('f', textFormat)
 ai_handler = MessageHandler(filter_awesome, textMessage)
 or_handler = MessageHandler(or_filter, orMessage)
 who_is_handler = MessageHandler(who_is_filter, whoIsMessage)
+# echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
 # echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
 
 dispatcher.add_handler(start_handler)
