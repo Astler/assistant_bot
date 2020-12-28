@@ -4,3 +4,4 @@ python-telegram-bot==13.1
 python-dotenv~=0.15.0
 apiai~=1.2.3
 Telethon~=1.18.2
+heroku==0.1.4
