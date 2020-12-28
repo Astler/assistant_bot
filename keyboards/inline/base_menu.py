@@ -113,8 +113,29 @@ apps_links = InlineKeyboardMarkup(
     ]
 )
 
-
 other_links = InlineKeyboardMarkup(
+    row_width=2,
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(
+                text="GeekStand.top",
+                url="geekstand.top"
+            ),
+            InlineKeyboardButton(
+                text="Other Link 2",
+                url="tt.com"
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text="Назад",
+                callback_data="back:back_to_links_menu"
+            )
+        ]
+    ]
+)
+
+secret_links = InlineKeyboardMarkup(
     row_width=2,
     inline_keyboard=[
         [

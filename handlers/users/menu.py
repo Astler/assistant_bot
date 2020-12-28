@@ -9,7 +9,7 @@ from loader import dp
 
 @dp.message_handler(Command("menu"))
 async def show_menu(message: types.Message):
-    await message.answer("Наошли ошибку? Желаете помочь? Есть идея?", reply_markup=menu)
+    await message.answer("Нашли ошибку? Желаете помочь? Есть идея?", reply_markup=menu)
 
 
 @dp.message_handler(text="Ошибка/Сбой")

@@ -23,3 +23,8 @@ async def bot_start(message: types.Message, user: User):
 @dp.message_handler(CommandStart())
 async def bot_start(message: types.Message):
     await message.answer(f'Приветствуем, {message.from_user.full_name} {message.from_user.id}!')
+
+
+@dp.message_handler(CommandStart())
+async def bot_start(message: types.Message):
+    await message.answer(f'Приветствуем, {message.from_user.full_name} {message.from_user.id}!')
