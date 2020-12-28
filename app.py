@@ -11,7 +11,6 @@ async def on_startup(dp):
     await on_startup_notify(dp)
     await set_default_commands(dp)
 
-print("start main app")
 
 if __name__ == '__main__':
     from aiogram import executor
