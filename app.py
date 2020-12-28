@@ -39,22 +39,6 @@ async def on_shutdown(dp):
     logging.warning("Bot down")
 
 
-@dp.message_handler(commands='start')
-async def welcome(message: types.Message):
-    await bot.send_message(
-        message.chat.id,
-        f'Приветствую! Это демонтрационный бот\n'
-        f'Подробная информация на '
-        f'{md.hlink("github", "https://github.com/deploy-your-bot-everywhere/heroku")}',
-        parse_mode=types.ParseMode.HTML,
-        disable_web_page_preview=True)
-
-
-@dp.message_handler()
-async def echo(message: types.Message):
-    await bot.send_message(message.chat.id, message.text)
-
-
 if __name__ == '__main__':
     from aiogram import executor, types
     from handlers import dp
