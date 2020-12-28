@@ -14,7 +14,11 @@ from data.config import (BOT_TOKEN, HEROKU_APP_NAME,
 
 
 async def on_startup(dp):
-    print("bot STARTup")
+    await bot.delete_webhook()
+    await bot.set_webhook(WEBHOOK_URL)
+
+    print("start main")
+
     import filters
     import middlewares
     filters.setup(dp)
@@ -27,7 +31,9 @@ async def on_startup(dp):
 
 # Run before shutdown
 async def on_shutdown(dp):
+    print("stop main")
     logging.warning("Shutting down..")
+    await bot.delete_webhook()
     await dp.storage.close()
     await dp.storage.wait_closed()
     logging.warning("Bot down")
@@ -52,12 +58,12 @@ async def echo(message: types.Message):
 if __name__ == '__main__':
     from aiogram import executor, types
     from handlers import dp
-    print("START")
-    executor.start_polling(dp, on_startup=on_startup, on_shutdown=on_shutdown)
 
-    # start_webhook(dispatcher=dp, webhook_path=WEBHOOK_PATH,
-    #               on_startup=on_startup, on_shutdown=on_shutdown,
-    #               host=WEBAPP_HOST, port=WEBAPP_PORT)
+    print("init main")
+
+    start_webhook(dispatcher=dp, webhook_path=WEBHOOK_PATH,
+                  on_startup=on_startup, on_shutdown=on_shutdown,
+                  host=WEBAPP_HOST, port=WEBAPP_PORT)
 
 # if "HEROKU" in list(os.environ.keys()):
 # else:
