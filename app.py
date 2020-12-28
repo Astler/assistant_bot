@@ -1,11 +1,15 @@
+import os
+
 from utils.set_bot_commands import set_default_commands
 from loader import bot, dp
 import logging
 from aiogram import types
-from aiogram.utils.executor import start_webhook
+from aiogram.dispatcher.webhook import get_new_configured_app
+
 from data.config import (BOT_TOKEN, HEROKU_APP_NAME,
-                          WEBHOOK_URL, WEBHOOK_PATH,
-                          WEBAPP_HOST, WEBAPP_PORT)
+                         WEBHOOK_URL, WEBHOOK_PATH,
+                         WEBAPP_HOST, WEBAPP_PORT)
+
 
 async def on_startup(dp):
     import filters
@@ -17,22 +21,32 @@ async def on_startup(dp):
     await on_startup_notify(dp)
     await set_default_commands(dp)
 
-    logging.warning(
-        'Starting connection. ')
-    await bot.set_webhook(WEBHOOK_URL, drop_pending_updates=True)
+    await bot.delete_webhook()
+    await bot.set_webhook(WEBHOOK_URL)
+
+
+# Run before shutdown
+async def on_shutdown(dp):
+    logging.warning("Shutting down..")
+    await bot.delete_webhook()
+    await dp.storage.close()
+    await dp.storage.wait_closed()
+    logging.warning("Bot down")
 
 
 if __name__ == '__main__':
     from aiogram import executor, types
     from handlers import dp
 
-    executor.start_polling(dp, on_startup=on_startup)
-
-    executor.start_webhook(
-        dispatcher=dp,
-        webhook_path=WEBHOOK_PATH,
-        on_startup=on_startup,
-        host=WEBAPP_HOST,
-        port=WEBAPP_PORT,
-    )
-
+    if "HEROKU" in list(os.environ.keys()):
+        executor.start_webhook(
+            dispatcher=dp,
+            webhook_path=WEBHOOK_PATH,
+            on_startup=on_startup,
+            on_shutdown=on_shutdown,
+            skip_updates=True,
+            host=WEBAPP_HOST,
+            port=WEBAPP_PORT,
+        )
+    else:
+        executor.start_polling(dp)

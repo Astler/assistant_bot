@@ -6,5 +6,5 @@ class IsGroup(BoundFilter):
     async def check(self, message: types.Message):
         return message.chat.type in (
             types.ChatType.GROUP,
-            types.ChatType.SUPER_GROUP
+            types.ChatType.SUPERGROUP
         )
