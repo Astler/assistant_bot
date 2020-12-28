@@ -10,7 +10,7 @@ import urllib.request
 import json
 
 
-@dp.message_handler(IsGroup(), commands="hof")
+@dp.message_handler(commands="hof")
 async def bot_get_hof(message: types.Message):
     await message.answer("Кого-то тут нет. Как думаешь? Да...Элизаб...Каледония Эш! Легенда преступного мира.")
 
