@@ -26,6 +26,8 @@ if __name__ == '__main__':
     from aiogram import executor, types
     from handlers import dp
 
+    executor.start_polling(dp, on_startup=on_startup)
+
     executor.start_webhook(
         dispatcher=dp,
         webhook_path=WEBHOOK_PATH,
@@ -34,4 +36,3 @@ if __name__ == '__main__':
         port=WEBAPP_PORT,
     )
 
-    #executor.start_polling(dp, on_startup=on_startup)
