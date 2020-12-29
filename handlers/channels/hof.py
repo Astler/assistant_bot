@@ -40,12 +40,12 @@ async def bot_get_hof(message: types.Message):
                 nUserInfo += item['mDescription']
 
             text += "\n\n • " + nUserInfo
-            await msg.edit_text(text)
 
+        await msg.edit_text(text)
         await message.answer("Обращайся!")
 
 
-@dp.message_handler(commands="mlv", user_id=admins)
+@dp.message_handler(commands="mlv")
 async def bot_echo(message: types.Message):
     text = "Думаешь там что-то изменилось с прошлого раза? "
     answer = await message.answer("Думаешь там что-то изменилось с прошлого раза? ")
