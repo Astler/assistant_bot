@@ -25,7 +25,7 @@ WEBAPP_HOST = '0.0.0.0'
 WEBAPP_PORT = 0
 
 if not str(os.getenv('PORT')).__contains__("None"):
-    WEBAPP_PORT = int(str(os.getenv('PORT')))
+    WEBAPP_PORT = os.getenv('PORT', default=8000)
 
 admins = [
     376225089
