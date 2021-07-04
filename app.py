@@ -45,11 +45,10 @@ if __name__ == '__main__':
 
     print("init main")
 
-    start_webhook(dispatcher=dp, webhook_path=WEBHOOK_PATH,
-                  on_startup=on_startup, on_shutdown=on_shutdown,
-                  host=WEBAPP_HOST, port=WEBAPP_PORT)
-
-# if "HEROKU" in list(os.environ.keys()):
-# else:
-#     executor.start_polling(dp)
-
+    if "HEROKU" in list(os.environ.keys()):
+        start_webhook(dispatcher=dp, webhook_path=WEBHOOK_PATH,
+                      on_startup=on_startup, on_shutdown=on_shutdown,
+                      host=WEBAPP_HOST, port=WEBAPP_PORT)
+    else:
+        executor.start_polling(dispatcher=dp,
+                      on_startup=on_startup, on_shutdown=on_shutdown,)

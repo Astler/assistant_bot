@@ -16,3 +16,13 @@ async def left_member(m: types.Message):
     else:
         await m.reply(
             f"{m.left_chat_member.get_mention(as_html=True)} был удалён пользователем {m.from_user.get_mention(as_html=True)}...")
+
+
+@dp.message_handler(content_types=types.ContentType.NEW_CHAT_TITLE)
+async def new_member(m: types.Message):
+    await m.delete()
+
+
+@dp.message_handler(content_types=types.ContentType.NEW_CHAT_PHOTO)
+async def new_member(m: types.Message):
+    await m.delete()

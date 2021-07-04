@@ -12,7 +12,6 @@ async def enter_test(message: types.Message):
     await message.answer("Вы начали тестирование. "
                          "\n\nПервый вопрос: Какие языки программирования вы знаете? (в т.ч. можно уточнить, "
                          "знаете свободно или только синтаксис)")
-    # await Test.Q1.set()
     await Test.first()
 
 

@@ -56,6 +56,21 @@ class Database:
     def count_ideas(self):
         return self.execute("SELECT COUNT(*) FROM Ideas_Table;", fetchone=True)
 
+    def create_table_users(self):
+        sql = """
+            CREATE TABLE IF NOT EXISTS Users_Table (
+            id integer,
+            user_id integer NOT NULL,
+            user_name text NOT NULL,
+            PRIMARY KEY("id" AUTOINCREMENT)
+            );"""
+
+        self.execute(sql, commit=True)
+
+    def get_user_data_by_id(self, user_id):
+        sql = f"SELECT * FROM Users_Table WHERE user_id={user_id}"
+        return self.execute(sql, fetchall=True)
+
 
 def logger(statement):
     print(f"""

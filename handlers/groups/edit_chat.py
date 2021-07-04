@@ -18,15 +18,12 @@ async def set_chat_photo(message: types.Message):
 
 
 @dp.message_handler(IsGroup(), Command("set_title", prefixes="!/"), AdminFilter())
-async def set_chat_photo(message: types.Message):
-    source_message = message.reply_to_message
-    title = source_message.text
-    await bot.set_chat_title(title)
+async def set_chat_title(message: types.Message):
+    arguments = message.get_args()
+    await bot.set_chat_title(chat_id=message.chat.id, title=arguments)
 
 
 @dp.message_handler(IsGroup(), Command("set_description", prefixes="!/"), AdminFilter())
-async def set_chat_photo(message: types.Message):
-    source_message = message.reply_to_message
-    title = source_message.text
-    await bot.set_chat_description(title)
-
+async def set_chat_description(message: types.Message):
+    arguments = message.get_args()
+    await bot.set_chat_description(chat_id=message.chat.id, description=arguments)

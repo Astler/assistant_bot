@@ -1,24 +1,27 @@
-import asyncio
 import datetime
 import re
 
 from aiogram import types
 from aiogram.dispatcher.filters import Command
-from aiogram.utils.exceptions import BadRequest
 
 from filters import IsGroup, AdminFilter
 from loader import dp, bot
+from utils import localization
 
 
 @dp.message_handler(IsGroup(), Command("ro", prefixes="!/"), AdminFilter())
-async def set_ro_mode(message: types.Message):
+async def set_read_only_mode(message: types.Message):
+    if not message.reply_to_message:
+        await message.reply(localization.get_string("can_be_used_with_reply"))
+        return
+
     member = message.reply_to_message.from_user.id
     member_name = message.reply_to_message.from_user.full_name
     chat_id = message.chat.id
-    command_parse = re.compile(r"(!ro|/ro) ?(\d+)? ?([a-zA-Z ]+)?")
+    command_parse = re.compile(r"(!ro|/ro|/ro@cat_assistant_bot) ?([a-zA-Zа-яА-Я ]+)? ?(\d+)?")
     parsed = command_parse.match(message.text)
-    time = parsed.group(2)
-    comment = parsed.group(3)
+    comment = parsed.group(2)
+    time = parsed.group(3)
 
     if not time:
         time = 5
@@ -27,7 +30,7 @@ async def set_ro_mode(message: types.Message):
 
     until_date = datetime.datetime.now() + datetime.timedelta(minutes=time)
 
-    ReadOnlyPermissions = types.ChatPermissions(
+    read_only_permissions = types.ChatPermissions(
         can_send_messages=False,
         can_send_media_messages=False,
         can_send_polls=False,
@@ -39,13 +42,19 @@ async def set_ro_mode(message: types.Message):
     )
 
     try:
-        await bot.restrict_chat_member(chat_id, user_id=member, permissions=ReadOnlyPermissions,
+        await bot.restrict_chat_member(chat_id, user_id=member, permissions=read_only_permissions,
                                        until_date=until_date)
-        await message.answer(f"Пользователю {member_name} запрещено писать на {time} минут. Причина: {comment}")
+
+        if comment is None:
+            reason = "Не указана"
+        else:
+            reason = comment
+
+        await message.answer(f"Пользователю {member_name} запрещено писать на {time} минут.\n\nПричина: {reason}.")
     except Exception as err:
         await message.answer("Пользователь Админ!" + err.__class__.__name__)
 
-    service_message = await message.reply("Это сообщение будет удалено через 5 секунд!")
-    await asyncio.sleep(5)
+    # service_message = await message.reply("Это сообщение будет удалено через 3 секунды!")
+    # await asyncio.sleep(3)
     await message.delete()
-    await service_message.delete()
+    # await service_message.delete()

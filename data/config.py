@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BOT_TOKEN = str("1280483802:AAHNu0JihLQBIZlP1qBsK3pasuNTeFeG7Ns")
+BOT_TOKEN = str("1825832213:AAGjVCLBcw_AZynaiU2fuZVs6O8ykJr4W5A")
 
 if not BOT_TOKEN:
     print('You have forgot to set BOT_TOKEN')
@@ -29,6 +29,10 @@ if not str(os.getenv('PORT')).__contains__("None"):
 
 admins = [
     376225089
+]
+
+myChats = [
+    -1001496194797
 ]
 
 ip = "localhost"
