@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 import re
 
@@ -58,3 +59,19 @@ async def set_read_only_mode(message: types.Message):
     # await asyncio.sleep(3)
     await message.delete()
     # await service_message.delete()
+
+
+@dp.message_handler(IsGroup(), Command("ro", prefixes="!/"))
+async def set_read_only_mode_not_admin(message: types.Message):
+    answer_message = await message.reply(localization.get_string("this_command_only_for_admins"))
+    await message.delete()
+    await asyncio.sleep(3)
+    await answer_message.delete()
+
+
+@dp.message_handler(Command("ro", prefixes="!/"))
+async def set_read_only_mode_not_admin(message: types.Message):
+    answer_message = await message.reply(localization.get_string("ro_in_personal_messages"))
+    await message.delete()
+    await asyncio.sleep(3)
+    await answer_message.delete()
