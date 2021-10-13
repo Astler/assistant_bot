@@ -8,7 +8,7 @@ import logging
 from aiogram import types, md
 from aiogram.dispatcher.webhook import get_new_configured_app
 
-from data.config import (BOT_TOKEN, HEROKU_APP_NAME,
+from data.config import (BOT_TOKEN,
                          WEBHOOK_URL, WEBHOOK_PATH,
                          WEBAPP_HOST, WEBAPP_PORT)
 

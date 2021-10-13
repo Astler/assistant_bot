@@ -55,10 +55,7 @@ async def set_read_only_mode(message: types.Message):
     except Exception as err:
         await message.answer("Пользователь Админ!" + err.__class__.__name__)
 
-    # service_message = await message.reply("Это сообщение будет удалено через 3 секунды!")
-    # await asyncio.sleep(3)
     await message.delete()
-    # await service_message.delete()
 
 
 @dp.message_handler(IsGroup(), Command("ro", prefixes="!/"))

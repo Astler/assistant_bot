@@ -9,10 +9,7 @@ db = Database()
 db.create_table_users()
 
 
-@dp.message_handler(CommandStart(deep_link="faggot"), IsPrivate())
-async def bot_start(message: types.Message):
-    await message.answer(f'Хмм, похоже тебе дали особую ссылку, {message.from_user.full_name}!\nИ у меня для тебя '
-                         f'особое сообщение :D\n\n{message.from_user.first_name}, ты козёл!')
+# @dp.message_handler(CommandStart(deep_link="someDP"), IsPrivate())
 
 
 # @rate_limit(limit=10)

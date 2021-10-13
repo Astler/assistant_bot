@@ -19,10 +19,10 @@ async def left_member(m: types.Message):
 
 
 @dp.message_handler(content_types=types.ContentType.NEW_CHAT_TITLE)
-async def new_member(m: types.Message):
+async def new_chat_title(m: types.Message):
     await m.delete()
 
 
 @dp.message_handler(content_types=types.ContentType.NEW_CHAT_PHOTO)
-async def new_member(m: types.Message):
+async def new_chat_photo(m: types.Message):
     await m.delete()

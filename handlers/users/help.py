@@ -9,11 +9,10 @@ from utils.misc import rate_limit
 @dp.message_handler(CommandHelp())
 async def bot_help(message: types.Message):
     text = [
-        'Список команд: ',
-        '/menu - Нашли ошибку? Желаете помочь? Есть идея?',
-        '/mlv - Последняя вресия игры',
-        '/hof - Зал славы сообщества KB',
-        '/links - Полезные ссылки',
-        '/tester - Инструкция как получать регулярные тестовые версии через App Tester'
+        'Тут',
+        'могла',
+        'быть',
+        'ваша',
+        'помощь'
     ]
     await message.answer('\n'.join(text))
