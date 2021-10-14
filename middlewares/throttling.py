@@ -10,7 +10,10 @@ from aiogram.utils.exceptions import Throttled
 async def message_throttled(message: types.Message, throttled: Throttled):
     delta = throttled.rate - throttled.delta
     if throttled.exceeded_count <= 2:
-        await message.bot.send_message(message.chat.id, 'Куда спешим? Перед следующим вызовом команды нужно подождать!')
+        msg = await message.bot.send_message(message.chat.id, f'Куда спешим? Перед следующим вызовом команды нужно '
+                                                              f'подождать {throttled.rate} c!')
+        await asyncio.sleep(3)
+        await msg.delete()
     await asyncio.sleep(delta)
     await message.delete()
 
