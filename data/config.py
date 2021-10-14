@@ -28,4 +28,4 @@ CHATS_ENV = os.getenv("CHATS").split("|")
 
 chats = [int(admin) for admin in CHATS_ENV]
 
-version = "0.2.1"
+version = "0.2.2"

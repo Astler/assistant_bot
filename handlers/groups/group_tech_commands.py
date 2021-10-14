@@ -9,4 +9,3 @@ from loader import dp
 async def get_chat_id(message: types.Message):
     await message.delete()
     await message.answer(message.chat.id)
-    print(message.chat.id)
