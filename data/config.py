@@ -28,4 +28,19 @@ CHATS_ENV = os.getenv("CHATS").split("|")
 
 chats = [int(admin) for admin in CHATS_ENV]
 
-version = "0.2.3 - indev"
+version = "0.2.3"
+
+
+LINKS_BLACK_LIST_ENV = os.getenv("LINKS_BLACK_LIST").split("|")
+
+links_black_list = [
+    "astler.test"
+]
+
+links_black_list.extend(LINKS_BLACK_LIST_ENV)
+
+changes = """Изменения
+0.2-0.2.2 - Удалил лишнее, поправил троттлер
+0.2.3 - Добавил чёрный список текста (ссылок), который подлежит удалению. Добавлять можно как через .env 
+LINKS_BLACK_LIST, так и в config.py 
+"""
