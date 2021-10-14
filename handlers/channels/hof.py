@@ -20,15 +20,6 @@ async def bot_get_hof(message: types.Message):
 
         json_users = json.loads(data)
 
-        text = "Да, список почти готов. Буквально последние штрихи"
-        await msg.edit_text(text)
-
-        await asyncio.sleep(1)
-
-        text = "Вот теперь это можно и людям показать!"
-        await msg.edit_text(text)
-        await asyncio.sleep(1)
-        text += "\n\nЗал славы сообщества KB!"
         await msg.edit_text(text)
 
         for item in json_users['mUsers']:
@@ -59,8 +50,3 @@ async def bot_echo(message: types.Message):
 
         text = f"Последняя релизная версия: {release}, а снапшот: {snapshot}."
         await answer.edit_text(text)
-
-
-@dp.message_handler(text="Хорошко")
-async def bot_wtf(message: types.Message):
-    await message.answer("Бррр... Зачем ты его вспонил?!")

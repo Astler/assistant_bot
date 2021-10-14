@@ -1,7 +1,4 @@
-import io
-
 from aiogram import types
-from aiogram.dispatcher.filters import Command
 
 from filters import IsGroup
 from filters.admin_filter import AdminFilter

@@ -1,4 +1,3 @@
-
 strings = {
     "en": {
         "error_no_reply": "This command must be sent as a reply to one's message!",
@@ -111,11 +110,6 @@ strings = {
 
 
 def get_string(key):
-    """
-    Get localized string. First, try language as set in config. Then, try English locale. Else - raise an exception.
-    :param key: string name
-    :return: localized string
-    """
     lang = strings.get("ru")
 
     if not lang:
