@@ -8,10 +8,16 @@ from aiogram.utils.exceptions import Throttled
 
 
 async def message_throttled(message: types.Message, throttled: Throttled):
+    print(throttled.rate)
+    print(throttled.delta)
     delta = throttled.rate - throttled.delta
+
+    print(delta)
+
     if throttled.exceeded_count <= 2:
         await message.reply('Куда спешим? Перед следующим вызовом команды нужно подождать!')
     await asyncio.sleep(delta)
+    await message.delete()
 
 
 class ThrottlingMiddleware(BaseMiddleware):
