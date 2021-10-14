@@ -1,7 +1,7 @@
 from aiogram import types
+from aiogram.dispatcher.filters import AdminFilter
 
 from filters import IsGroup
-from filters.admin_filter import AdminFilter
 from loader import dp, bot
 from utils import localization
 

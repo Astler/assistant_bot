@@ -1,10 +1,9 @@
 import io
 
 from aiogram import types
-from aiogram.dispatcher.filters import Command
+from aiogram.dispatcher.filters import Command, AdminFilter
 
 from filters import IsGroup
-from filters.admin_filter import AdminFilter
 from loader import dp, bot
 
 

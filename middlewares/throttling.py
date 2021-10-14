@@ -7,6 +7,13 @@ from aiogram.dispatcher.middlewares import BaseMiddleware
 from aiogram.utils.exceptions import Throttled
 
 
+async def message_throttled(message: types.Message, throttled: Throttled):
+    delta = throttled.rate - throttled.delta
+    if throttled.exceeded_count <= 2:
+        await message.reply('Куда спешим? Перед следующим вызовом команды нужно подождать!')
+    await asyncio.sleep(delta)
+
+
 class ThrottlingMiddleware(BaseMiddleware):
 
     def __init__(self, limit=DEFAULT_RATE_LIMIT, key_prefix='antiflood_'):
@@ -27,11 +34,5 @@ class ThrottlingMiddleware(BaseMiddleware):
         try:
             await dispatcher.throttle(key, rate=limit)
         except Throttled as t:
-            await self.message_throttled(message, t)
+            await message_throttled(message, t)
             raise CancelHandler()
-
-    async def message_throttled(self, message: types.Message, throttled: Throttled):
-        delta = throttled.rate - throttled.delta
-        if throttled.exceeded_count <= 2:
-            await message.reply('Куда спешим? Перед следующим вызовом команды нужно подождать!')
-        await asyncio.sleep(delta)

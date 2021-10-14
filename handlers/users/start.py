@@ -9,7 +9,7 @@ from utils.misc import rate_limit
 # @dp.message_handler(CommandStart(deep_link="someDP"), IsPrivate())
 
 
-@rate_limit(limit=10)
+@rate_limit()
 @dp.message_handler(CommandStart(), IsPrivate())
 async def bot_start(message: types.Message):
     await message.answer(f'Привет, {message.from_user.full_name}!')
