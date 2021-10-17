@@ -22,6 +22,7 @@ async def spam_links_msg(message: types.Message):
             print(f"Сообщение удалено кем-то другим! {e}")
 
         [await message.bot.send_message(admin_chat, f"Я удалил сообщение!\n\n"
+                                                    f"Чат: {message.chat.title}\n"
                                                     f"Отправитель: {message.from_user.full_name}\n"
                                                     f"Id Отправителя: {message.from_user.id}\n"
                                                     f"Текст: {text}") for admin_chat in admins]

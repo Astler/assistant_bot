@@ -28,7 +28,7 @@ CHATS_ENV = os.getenv("CHATS").split("|")
 
 chats = [int(admin) for admin in CHATS_ENV]
 
-version = "0.2.6"
+version = "0.2.6.1"
 
 
 LINKS_BLACK_LIST_ENV = os.getenv("LINKS_BLACK_LIST").split("|")
@@ -50,4 +50,5 @@ LINKS_BLACK_LIST, так и в config.py
 Добавил команду для получения айдишников стикеров, в т.ч. инлайн меню
 0.2.5.1 - Исправил баг, при котором не удалялось техническое сообщение (link_spam_group.py) при удалении сообщения триггера кем-то другим
 0.2.6 - Обновил функции редактирования канала: set_title, set_photo, set_description
+0.2.6.1 - Теперь оповещение о спаме сообщает и канал, где было заблокированно сообщение
 """
