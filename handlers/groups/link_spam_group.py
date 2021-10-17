@@ -16,7 +16,10 @@ async def spam_links_msg(message: types.Message):
                                                   "На этом канале запрещены ссылки, скрывающие реальный адрес "
                                                   "вебсайта. Если это сообщение получено по ошибке - обратитесь"
                                                   " к администрации.")
-        await message.delete()
+        try:
+            await message.delete()
+        except Exception as e:
+            print(f"Сообщение удалено кем-то другим! {e}")
 
         [await message.bot.send_message(admin_chat, f"Я удалил сообщение!\n\n"
                                                     f"Отправитель: {message.from_user.full_name}\n"

@@ -1,3 +1,6 @@
+from .start_group import dp
+from .help_group import dp
+from .only_private import dp
 from .service_messages import dp
 from .edit_chat import dp
 from .moderation import dp

@@ -8,8 +8,6 @@ from utils import localization
 
 @dp.message_handler(IsGroup(), AdminFilter(), commands=["ban"])
 async def ban(message: types.Message):
-    print("text = ", message)
-
     if not message.reply_to_message:
         await message.reply(localization.get_string("error_no_reply"))
         return
