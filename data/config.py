@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BOT_TOKEN = os.getenv("TOKEN_KEY")
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN_KEY")
+GITHUB_REPO = os.getenv("GITHUB_REPO")
 
 if not BOT_TOKEN:
     print('You have forgot to set BOT_TOKEN ' + str(BOT_TOKEN) + '?')
@@ -28,7 +30,7 @@ CHATS_ENV = os.getenv("CHATS").split("|")
 
 chats = [int(admin) for admin in CHATS_ENV]
 
-version = "0.2.6.1"
+version = "0.2.7"
 
 
 LINKS_BLACK_LIST_ENV = os.getenv("LINKS_BLACK_LIST").split("|")
@@ -51,4 +53,5 @@ LINKS_BLACK_LIST, так и в config.py
 0.2.5.1 - Исправил баг, при котором не удалялось техническое сообщение (link_spam_group.py) при удалении сообщения триггера кем-то другим
 0.2.6 - Обновил функции редактирования канала: set_title, set_photo, set_description
 0.2.6.1 - Теперь оповещение о спаме сообщает и канал, где было заблокированно сообщение
+0.2.7 - Т.к. Файловая система Heroku эфемерна и стирается при каждом перезапуске, то теперь файлики юзеров загружаются на гитхам 🤣
 """

@@ -1,6 +1,7 @@
-aiogram==2.13
-aiohttp==3.7.3
-python-telegram-bot==13.1
-python-dotenv~=0.15.0
-Telethon~=1.18.2
+aiogram==2.15
+aiohttp==3.7.4.post0
+python-telegram-bot==13.7
+python-dotenv==0.19.1
+Telethon==1.23.0
+PyGithub==1.55
 heroku==0.1.4
