@@ -1,4 +1,4 @@
-aiogram==2.15
+aiogram==2.16
 aiohttp==3.8.0
 python-telegram-bot==13.7
 python-dotenv==0.19.1
