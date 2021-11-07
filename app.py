@@ -3,7 +3,7 @@ import os
 from aiogram.utils.executor import start_webhook
 
 from utils.set_bot_commands import set_default_commands
-from loader import bot, dp
+from loader import bot
 import logging
 
 from data.config import (WEBHOOK_URL, WEBHOOK_PATH,
@@ -27,14 +27,18 @@ async def on_startup(dp):
 
 async def on_shutdown(dp):
     logging.warning("Shutting down..")
+    from utils.notify_admins import on_shutdown_notify
+    await on_shutdown_notify(dp)
+
     await bot.delete_webhook()
     await dp.storage.close()
     await dp.storage.wait_closed()
+
     logging.warning("Bot down")
 
 
 if __name__ == '__main__':
-    from aiogram import executor, types
+    from aiogram import executor
     from handlers import dp
 
     path = os.getcwd() + "/users/"

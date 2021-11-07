@@ -5,7 +5,6 @@ from loader import dp
 from utils.misc import rate_limit
 from utils.user_data.data import delete_simple_commands
 
-
 @rate_limit()
 @dp.message_handler(IsGroup(), commands=["sticker_id"])
 @dp.message_handler(IsGroup(), commands=["id"])

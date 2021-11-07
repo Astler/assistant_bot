@@ -1,3 +1,6 @@
 from aiogram.utils.callback_data import CallbackData
 
-sticker_callback = CallbackData("sticker", "action")
+cancel_action_callback = CallbackData("cancel", "action")
+simple_callback = CallbackData("callback", "action")
+
+post_creation_callback = CallbackData("post", "action")

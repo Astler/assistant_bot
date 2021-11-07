@@ -8,4 +8,5 @@ from .private_chat import IsPrivate
 def setup(dp: Dispatcher):
     pass
     dp.filters_factory.bind(IsGroup)
+    dp.filters_factory.bind(IsPrivate)
     dp.filters_factory.bind(BotAdminsFilter)

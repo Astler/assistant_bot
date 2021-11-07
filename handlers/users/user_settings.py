@@ -8,11 +8,11 @@ from loader import dp
 from utils.user_data.data import get_user_dict, save_user_dict, delete_simple_commands
 
 
-@dp.message_handler(IsPrivate(), commands=["ahah"])
+@dp.message_handler(IsPrivate(), commands=["profile"])
 async def options(message: types.Message):
     user_dict = get_user_dict(message.from_user.id)
 
-    command_parse = re.compile(r"(!ahah|/ahah|/ahah@cat_assistant_bot) ?([a-zA-Zа-яА-Я ]+)?")
+    command_parse = re.compile(r"(!profile|/profile|/profile@cat_assistant_bot) ?([a-zA-Zа-яА-Я ]+)?")
     parsed = command_parse.match(message.text)
     new_value = parsed.group(2)
 

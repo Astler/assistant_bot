@@ -19,11 +19,11 @@ def get_user_dict(user_id: int):
         if len(contents) != 0:
             user_data = json.loads(contents)
         else:
-            user_data = {"delete_simple_command_requests": False}
+            user_data = {"delete_simple_command_requests": False, "user_channels": []}
             save_user_dict(user_id, user_data)
 
     except GithubException:
-        user_data = {"delete_simple_command_requests": False}
+        user_data = {"delete_simple_command_requests": False, "user_channels": []}
         save_user_dict(user_id, user_data)
 
     print(user_data)
@@ -42,3 +42,23 @@ def save_user_dict(user_id: int, user_dict):
 
 def delete_simple_commands(user_id: int):
     return get_user_dict(user_id).get("delete_simple_command_requests", False)
+
+
+def add_user_channel(user_id: int, channel_id: int):
+    user_dict = get_user_dict(user_id)
+    data = user_dict.get("user_admin_channels", [])
+
+    if not data.__contains__(channel_id):
+        data.append(channel_id)
+
+    user_dict["user_admin_channels"] = data
+
+    save_user_dict(user_id, user_dict)
+
+
+def get_user_channels(user_id: int):
+    user_dict = get_user_dict(user_id)
+    return user_dict.get("user_admin_channels", [])
+
+
+

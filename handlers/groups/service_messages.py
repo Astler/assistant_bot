@@ -1,6 +1,8 @@
+import asyncio
+
 from aiogram import types
 
-from loader import dp
+from loader import dp, bot
 
 
 @dp.message_handler(content_types=types.ContentType.NEW_CHAT_MEMBERS)
@@ -13,7 +15,7 @@ async def new_member(message: types.Message):
 
     if len(members_array) != 0:
         members = ", ".join([member.get_mention(as_html=True) for member in members_array])
-        await message.bot.send_message(message.chat.id, f"Привет, {members}.")
+        await bot.send_message(message.chat.id, f"Привет, {members}.")
 
 
 @dp.message_handler(content_types=types.ContentType.LEFT_CHAT_MEMBER)
@@ -33,3 +35,4 @@ async def new_chat_title(m: types.Message):
 @dp.message_handler(content_types=types.ContentType.NEW_CHAT_PHOTO)
 async def new_chat_photo(m: types.Message):
     await m.delete()
+

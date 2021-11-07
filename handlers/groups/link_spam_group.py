@@ -6,10 +6,15 @@ from data.config import admins, links_black_list
 from filters import IsGroup
 from loader import dp
 
+from utils.group_data.data import get_group_file, get_group_dict, get_blocked_links, save_group_dict
 
 @dp.message_handler(IsGroup())
 async def spam_links_msg(message: types.Message):
     text = message.text
+
+    check_links = links_black_list
+
+    check_links.extend(get_blocked_links(message.chat.id))
 
     if any(bl_url in text for bl_url in links_black_list):
         info_msg = await message.bot.send_message(message.chat.id,
