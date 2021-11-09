@@ -2,11 +2,12 @@ import asyncio
 
 from aiogram import types
 
-from data.config import admins, links_black_list
+from data.config import links_black_list
 from filters import IsGroup
 from loader import dp
+from utils.admin_data.data import get_a_list
+from utils.group_data.data import get_blocked_links
 
-from utils.group_data.data import get_group_file, get_group_dict, get_blocked_links, save_group_dict
 
 @dp.message_handler(IsGroup())
 async def spam_links_msg(message: types.Message):
@@ -30,7 +31,7 @@ async def spam_links_msg(message: types.Message):
                                                     f"Чат: {message.chat.title}\n"
                                                     f"Отправитель: {message.from_user.full_name}\n"
                                                     f"Id Отправителя: {message.from_user.id}\n"
-                                                    f"Текст: {text}") for admin_chat in admins]
+                                                    f"Текст: {text}") for admin_chat in get_a_list()]
 
         await asyncio.sleep(10)
 

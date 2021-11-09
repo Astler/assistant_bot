@@ -6,7 +6,7 @@ from aiogram.dispatcher.filters import AdminFilter
 from filters import IsGroup
 from loader import dp
 
-from utils.group_data.data import get_group_file, get_group_dict, get_blocked_links, save_group_dict
+from utils.group_data.data import get_group_dict, get_blocked_links, save_group_dict
 
 
 @dp.message_handler(IsGroup(), AdminFilter(), commands=["add_black_link"])

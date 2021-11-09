@@ -62,7 +62,8 @@ async def get_new_photo_photo(message: types.Message, state: FSMContext):
         await bot.set_chat_photo(chat_id=message.chat.id, photo=input_files)
         await bot.send_message(message.chat.id, "Фото обновлено!")
     except:
-        await bot.send_message(message.chat.id, "При попытке загрузки изображения произошла ошибка. Изображение ли это?")
+        await bot.send_message(message.chat.id,
+                               "При попытке загрузки изображения произошла ошибка. Изображение ли это?")
 
     await state.finish()
 
