@@ -32,8 +32,6 @@ WEBHOOK_HOST = f'https://catassistantbot.herokuapp.com'
 WEBHOOK_PATH = f'/webhook/{BOT_TOKEN}'
 WEBHOOK_URL = f'{WEBHOOK_HOST}{WEBHOOK_PATH}'
 
-
-
 WEBAPP_HOST = '0.0.0.0'
 WEBAPP_PORT = 0
 
@@ -44,16 +42,21 @@ CHATS_ENV = os.getenv("CHATS").split("|")
 
 chats = [int(admin) for admin in CHATS_ENV]
 
-version = "0.3.1"
+version = "0.3.2"
 
-
-LINKS_BLACK_LIST_ENV = os.getenv("LINKS_BLACK_LIST").split("|")
+LINKS_BLACK_LIST_ENV = os.getenv("LINKS_BLACK_LIST")
 
 links_black_list = [
-    "astler.test"
+    "astler.test",
+    "cutt.ly",
+    "cutt.us",
+    "tinyurl.com",
+    "cuti.cc",
+    "gee.su",
 ]
 
-links_black_list.extend(LINKS_BLACK_LIST_ENV)
+if LINKS_BLACK_LIST_ENV is not None:
+    links_black_list.extend(LINKS_BLACK_LIST_ENV.split("|"))
 
 changes = """Изменения
 0.2-0.2.2 - Удалил лишнее, поправил троттлер
@@ -78,6 +81,9 @@ LINKS_BLACK_LIST, так и в config.py
 Обновил существующие функции менюшками, где можно отменить операции, подтвердить и т.д.
 Обновил отобржаение HOF и актуальных версий minecraft
 Изменил способ подтверждения статуса админов бота (не админов чатов, где есть бот, а именно тех, кто имеет полный доступ к боту)
+0.3.1.1 - Добавил хардом ресурсы для сокращения ссылок (+ несколько новых в блок), т.к. нафиг их. Будем банить все совпадения :D
+0.3.2 - Сделал первые шаги в создании настроек бота для чатов. Отключение кнопками, удаление старых сообщений (работает как-то криво!) и 
+кеширование данных с гита, чтобы уменьшить время ожидания при частых запросах. 
 
 TODO:
 Сейчас бот при блокировке ссылки из ЧС оповещает меня в ЛЮБОМ случае. Это плохо, надо перенести этот функционал на админов конкретного чата
