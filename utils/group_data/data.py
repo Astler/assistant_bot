@@ -41,7 +41,7 @@ def get_last_settings_msg(group_id: int):
 ### LOCAL ###
 
 def get_local_file(group_id: int):
-    return os.getcwd() + f"\\groups\\{group_id}.json"
+    return os.getcwd() + f"/groups/{group_id}.json"
 
 
 def get_local_dict(group_id: int):
