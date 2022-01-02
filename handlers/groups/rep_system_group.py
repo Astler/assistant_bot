@@ -92,6 +92,8 @@ def get_cat_user(users: dict, user_id: int):
 def create_user_mention(chatMember: ChatMember):
     userName = chatMember.user.username
 
+    print(chatMember.user)
+
     if userName is None:
         userName = chatMember.user.full_name
 
