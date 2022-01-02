@@ -32,6 +32,30 @@ async def my_rep(message: types.Message):
     await message.reply(user_info_text, parse_mode="Markdown")
 
 
+@dp.message_handler(commands="group_rep")
+async def my_rep(message: types.Message):
+    chat_id = message.chat.id
+
+    group_settings = get_group_dict(chat_id)
+    users: dict = group_settings.get("users", {})
+
+    users_by_rep = {}
+
+    for user in users:
+        cat_user_info = get_cat_user(users, user)
+        users_by_rep[cat_user_info.user_id] = cat_user_info.reputation
+
+    dict(sorted(users_by_rep.items(), key=lambda item: item[1]))
+
+    users_with_rep = []
+
+    for user_id in users_by_rep.keys():
+        mention_user = create_user_mention(await message.bot.get_chat_member(chat_id, user_id))
+        users_with_rep.append(f"{mention_user}: *{users_by_rep[user_id]}* ❤")
+
+    await message.reply("\n".join(users_with_rep), parse_mode="Markdown")
+
+
 @dp.message_handler(IsRepMsg())
 async def rep_msg(message: types.Message):
     source_message = message.reply_to_message
