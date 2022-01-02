@@ -144,3 +144,5 @@ dmypy.json
 /be_versions.json
 /banners_test.json
 /groups/
+/cat_pyro.session
+/cat_pyro.session-journal

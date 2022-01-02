@@ -95,6 +95,6 @@ def create_user_mention(chatMember: ChatMember):
     print(chatMember.user)
 
     if userName is None:
-        userName = chatMember.user.full_name
+        userName = chatMember.user.first_name
 
     return "[" + userName + "](tg://user?id=" + str(chatMember.user.id) + ")"
