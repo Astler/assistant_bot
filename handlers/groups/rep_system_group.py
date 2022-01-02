@@ -1,6 +1,8 @@
 import json
+from datetime import datetime
 
 from aiogram import types
+from telegram import ChatMember
 
 from filters.is_rep_msg import IsRepMsg, positive_rep
 from loader import dp
@@ -41,18 +43,20 @@ async def rep_msg(message: types.Message):
     else:
         user_change_author = CatUser(user_to_update_id)
 
-    to_change_user = await message.bot.get_chat_member(chat_id, user_to_update_id)
-    sender_user = await message.bot.get_chat_member(chat_id, user_change_author_id)
+    if user_change_author.last_rep_edit_time != 0 and datetime.utcnow() - user_change_author.last_rep_edit_time < 10000:
+        await message.reply("Слишком часто менять репутацию нельзя!")
+        return
 
-    mention_change_user = "[" + to_change_user.user.username + "](tg://user?id=" + str(user_to_update_id) + ")"
-    mention_sender_user = "[" + sender_user.user.username + "](tg://user?id=" + str(user_change_author_id) + ")"
+    user_change_author.last_rep_edit_time = datetime.utcnow()
+
+    mention_change_user = create_user_mention(await message.bot.get_chat_member(chat_id, user_to_update_id))
+    mention_sender_user = create_user_mention(await message.bot.get_chat_member(chat_id, user_change_author_id))
 
     if any(word in message.text for word in positive_rep):
         user_to_update.reputation += 1
         await message.reply(
             f"Репутация {mention_change_user}  *{user_to_update.reputation}* ❤  повышена пользователем {mention_sender_user}  *{user_change_author.reputation}* ❤  !",
             parse_mode="Markdown")
-
     else:
         user_to_update.reputation -= 1
         await message.reply(
@@ -60,6 +64,16 @@ async def rep_msg(message: types.Message):
             parse_mode="Markdown")
 
     users[user_to_update_id] = json.dumps(user_to_update, cls=CatUser.CatUserEncoder)
+    users[user_change_author_id] = json.dumps(user_change_author, cls=CatUser.CatUserEncoder)
     group_settings["users"] = users
 
     save_group_dict(chat_id, group_settings)
+
+
+def create_user_mention(chatMember: ChatMember):
+    userName = chatMember.user.name
+
+    if userName is None:
+        userName = chatMember.user.username
+
+    return "[" + userName + "](tg://user?id=" + str(chatMember.user.id) + ")"

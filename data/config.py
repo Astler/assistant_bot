@@ -42,7 +42,7 @@ CHATS_ENV = os.getenv("CHATS").split("|")
 
 chats = [int(admin) for admin in CHATS_ENV]
 
-version = "0.3.3.1"
+version = "0.3.3.2"
 
 LINKS_BLACK_LIST_ENV = os.getenv("LINKS_BLACK_LIST")
 
@@ -87,6 +87,7 @@ LINKS_BLACK_LIST, так и в config.py
 0.3.2.1 - фикс записи?
 0.3.3 - +rep -rep сырая реализация
 0.3.3.1 - фиксы репутации
+0.3.3.2 - фиксы вылета репутации у юзеров без никнейма
 
 TODO:
 Сейчас бот при блокировке ссылки из ЧС оповещает меня в ЛЮБОМ случае. Это плохо, надо перенести этот функционал на админов конкретного чата
