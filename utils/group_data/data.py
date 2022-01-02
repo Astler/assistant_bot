@@ -14,7 +14,7 @@ def get_group_dict(group_id: int):
             print(e)
             return get_git_dict(group_id)
     else:
-        get_git_dict(group_id)
+        return get_git_dict(group_id)
 
 
 def save_group_dict(group_id: int, group_dict):
