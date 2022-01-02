@@ -18,12 +18,14 @@ async def bot_settings_start(message: types.Message):
     group_settings = get_group_dict(chat_id)
     delete_commands = group_settings.get("delete_commands", True)
     delete_previous_settings = group_settings.get("delete_previous_settings", True)
+    adult_mode = group_settings.get("adult_mode", False)
 
     if delete_commands:
         await message.delete()
 
     msg = await bot.send_message(message.chat.id, "Вот мои текущие настройки!",
-                                 reply_markup=bot_settings_group_keyboard(delete_commands, delete_previous_settings))
+                                 reply_markup=bot_settings_group_keyboard(delete_commands, delete_previous_settings,
+                                                                          adult_mode))
 
     if delete_previous_settings:
         settings_msg_last = group_settings.get("last_settings_msg_id", 0)
@@ -43,12 +45,40 @@ async def publish_new_data(query: types.CallbackQuery):
     group_settings["delete_commands"] = new_delete_commands_value
     save_group_dict(chat_id, group_settings)
 
+    delete_commands = group_settings.get("delete_commands", True)
+    delete_previous_settings = group_settings.get("delete_previous_settings", True)
+    adult_mode = group_settings.get("adult_mode", False)
+
     if new_delete_commands_value:
         await query.message.edit_text("Теперь бот будет удалять отправленные ему комманды",
-                                      reply_markup=bot_settings_group_keyboard(new_delete_commands_value))
+                                      reply_markup=bot_settings_group_keyboard(delete_commands,
+                                                                               delete_previous_settings, adult_mode))
     else:
         await query.message.edit_text("Теперь бот НЕ будет удалять отправленные ему комманды",
-                                      reply_markup=bot_settings_group_keyboard(new_delete_commands_value))
+                                      reply_markup=bot_settings_group_keyboard(delete_commands,
+                                                                               delete_previous_settings, adult_mode))
+
+
+@dp.callback_query_handler(AdminFilter(), bot_group_settings.filter(action="toggle_bot_adult_mode"))
+async def publish_new_data(query: types.CallbackQuery):
+    chat_id = query.message.chat.id
+    group_settings = get_group_dict(chat_id)
+    new_delete_commands_value = not group_settings.get("adult_mode", False)
+    group_settings["adult_mode"] = new_delete_commands_value
+    save_group_dict(chat_id, group_settings)
+
+    delete_commands = group_settings.get("delete_commands", True)
+    delete_previous_settings = group_settings.get("delete_previous_settings", True)
+    adult_mode = group_settings.get("adult_mode", False)
+
+    if new_delete_commands_value:
+        await query.message.edit_text("Теперь в боте доступны злые функции",
+                                      reply_markup=bot_settings_group_keyboard(delete_commands,
+                                                                               delete_previous_settings, adult_mode))
+    else:
+        await query.message.edit_text("Теперь бот скроет злые функции",
+                                      reply_markup=bot_settings_group_keyboard(delete_commands,
+                                                                               delete_previous_settings, adult_mode))
 
 
 @dp.callback_query_handler(AdminFilter(), bot_group_settings.filter(action="cancel"))

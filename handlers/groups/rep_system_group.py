@@ -22,8 +22,14 @@ async def my_rep(message: types.Message):
 
     cat_user_info = get_cat_user(users, user_id)
 
-    await message.reply(f"Привет, {mention_user}!\n\nТвоя репутация: *{cat_user_info.reputation}* ❤",
-                        parse_mode="Markdown")
+    is_adult_mode = group_settings.get("adult_mode", False)
+
+    user_info_text = f"Привет, {mention_user}!\n\nТвоя репутация: *{cat_user_info.reputation}* ❤"
+
+    if is_adult_mode:
+        user_info_text += f"\nТы был пидором {cat_user_info.pidor_times} раз"
+
+    await message.reply(user_info_text, parse_mode="Markdown")
 
 
 @dp.message_handler(IsRepMsg())
