@@ -1,13 +1,14 @@
 import os
 
 from aiogram.utils.executor import start_webhook
+from pyrogram import Client
 
 from utils.set_bot_commands import set_default_commands
-from loader import bot
+from loader import bot, app
 import logging
 
 from data.config import (WEBHOOK_URL, WEBHOOK_PATH,
-                         WEBAPP_HOST, WEBAPP_PORT)
+                         WEBAPP_HOST, WEBAPP_PORT, BOT_TOKEN, API_ID, API_HASH)
 
 
 async def on_startup(dp):
@@ -49,6 +50,8 @@ if __name__ == '__main__':
         print("Creation of the directory %s failed" % path)
     else:
         print("Successfully created the directory %s " % path)
+
+    app.start()
 
     if "HEROKU" in list(os.environ.keys()):
         start_webhook(dispatcher=dp, webhook_path=WEBHOOK_PATH,
