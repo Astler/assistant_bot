@@ -46,7 +46,7 @@ CHATS_ENV = os.getenv("CHATS").split("|")
 
 chats = [int(admin) for admin in CHATS_ENV]
 
-version = "0.3.4"
+version = "0.3.5"
 
 LINKS_BLACK_LIST_ENV = os.getenv("LINKS_BLACK_LIST")
 
