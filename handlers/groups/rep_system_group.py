@@ -1,4 +1,5 @@
 import json
+import time
 from datetime import datetime
 
 from aiogram import types
@@ -43,11 +44,11 @@ async def rep_msg(message: types.Message):
     else:
         user_change_author = CatUser(user_to_update_id)
 
-    if user_change_author.last_rep_edit_time != 0 and datetime.utcnow() - user_change_author.last_rep_edit_time < 10000:
+    if user_change_author.last_rep_edit_time != 0 and round(time.time() * 1000) - user_change_author.last_rep_edit_time < 10000:
         await message.reply("Слишком часто менять репутацию нельзя!")
         return
 
-    user_change_author.last_rep_edit_time = datetime.utcnow()
+    user_change_author.last_rep_edit_time = round(time.time() * 1000)
 
     mention_change_user = create_user_mention(await message.bot.get_chat_member(chat_id, user_to_update_id))
     mention_sender_user = create_user_mention(await message.bot.get_chat_member(chat_id, user_change_author_id))
