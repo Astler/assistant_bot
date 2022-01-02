@@ -9,7 +9,8 @@ from loader import dp, bot
 @dp.message_handler(commands="all_in_chat")
 async def my_rep(message: types.Message):
     app = Client(
-        BOT_TOKEN,
+        "cat_pyro",
+        bot_token=BOT_TOKEN,
         api_id=API_ID,
         api_hash=API_HASH
     )
