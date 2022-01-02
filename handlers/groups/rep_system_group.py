@@ -71,9 +71,9 @@ async def rep_msg(message: types.Message):
 
 
 def create_user_mention(chatMember: ChatMember):
-    userName = chatMember.user.name
+    userName = chatMember.user.username
 
     if userName is None:
-        userName = chatMember.user.username
+        userName = chatMember.user.full_name
 
     return "[" + userName + "](tg://user?id=" + str(chatMember.user.id) + ")"
