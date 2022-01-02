@@ -11,6 +11,7 @@ from .moderation import dp
 from .ban import dp
 from .group_tech_commands import dp
 from .rep_system_group import dp
+from .choose_hero_system_group import dp
 from .link_spam_group import dp
 
 __all__ = ["dp"]

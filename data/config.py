@@ -5,6 +5,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BOT_TOKEN = os.getenv("TOKEN_KEY")
+
+API_ID = os.getenv("API_ID")
+API_HASH = os.getenv("API_HASH")
+
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN_KEY")
 GITHUB_REPO = os.getenv("GITHUB_REPO")
 A_PATH = os.getenv('A_PATH')
@@ -42,7 +46,7 @@ CHATS_ENV = os.getenv("CHATS").split("|")
 
 chats = [int(admin) for admin in CHATS_ENV]
 
-version = "0.3.3.4"
+version = "0.3.4"
 
 LINKS_BLACK_LIST_ENV = os.getenv("LINKS_BLACK_LIST")
 
@@ -90,6 +94,7 @@ LINKS_BLACK_LIST, так и в config.py
 0.3.3.2 - фиксы вылета репутации у юзеров без никнейма
 0.3.3.3 - добавил задержку изменения репутации, изменил аккаунт деплоя, т.к. старый потерял ((
 0.3.3.4 - пофиксил баги, почистил код, добавил my_rep комманду, которая покажет репутацию юзера конкретно в этом чате!
+0.3.4 - добавил команду all_in_chat, которая отвечает списком всех пользователей в чате
 
 TODO:
 Сейчас бот при блокировке ссылки из ЧС оповещает меня в ЛЮБОМ случае. Это плохо, надо перенести этот функционал на админов конкретного чата
