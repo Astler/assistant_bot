@@ -15,14 +15,14 @@ async def my_rep(message: types.Message):
     chat_id = message.chat.id
     user_id = message.from_user.id
 
-    mention_user = create_user_mention(await message.bot.get_chat_member(chat_id, user_id))
-
     group_settings = get_group_dict(chat_id)
     users: dict = group_settings.get("users", {})
 
     cat_user_info = get_cat_user(users, user_id)
 
     is_adult_mode = group_settings.get("adult_mode", False)
+
+    mention_user = create_user_mention(await message.bot.get_chat_member(chat_id, user_id))
 
     user_info_text = f"Привет, {mention_user}!\n\nТвоя репутация: *{cat_user_info.reputation}* ❤"
 
@@ -90,8 +90,10 @@ async def rep_change_for_self(message: types.Message):
 def get_cat_user(users: dict, user_id: int):
     if users.__contains__(str(user_id)):
         user_json = users[str(user_id)]
+        print(f"has user = {user_json}")
         return json.loads(user_json, object_hook=lambda d: CatUser(**d))
     else:
+        print(f"new user!!")
         return CatUser(user_id)
 
 
