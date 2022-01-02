@@ -56,7 +56,7 @@ def get_local_dict(group_id: int):
         group_data = {"blocked_links": [], "delete_commands": True}
         save_local_dict(group_id, group_data)
 
-    print("LOCAL LOADED!")
+    print(f"LOCAL LOADED! {group_data}")
 
     return group_data
 
