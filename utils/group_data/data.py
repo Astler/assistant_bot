@@ -7,11 +7,14 @@ from loader import repository
 
 
 def get_group_dict(group_id: int):
-    try:
-        return get_local_dict(group_id)
-    except Exception as e:
-        print(e)
-        return get_git_dict(group_id)
+    if os.path.exists(get_local_file(group_id)):
+        try:
+            return get_local_dict(group_id)
+        except Exception as e:
+            print(e)
+            return get_git_dict(group_id)
+    else:
+        get_git_dict(group_id)
 
 
 def save_group_dict(group_id: int, group_dict):
@@ -96,6 +99,7 @@ def get_git_dict(group_id: int):
         save_group_dict(group_id, user_data)
 
     print("GIT LOADED!")
+
     save_local_dict(group_id, user_data)
 
     return user_data
