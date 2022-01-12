@@ -23,6 +23,30 @@ async def my_rep(message: types.Message):
     await bot.send_message(message.chat.id, "\n".join(all_in_chat), parse_mode="Markdown")
 
 
+@dp.message_handler(commands="pidor_stats")
+async def my_rep(message: types.Message):
+    chat_id = message.chat.id
+
+    group_settings = get_group_dict(chat_id)
+    pidors_all = group_settings.get("pidors")
+
+    stats = ""
+
+    for key in pidors_all:
+        member = await app.get_chat_member(chat_id, int(pidors_all[key]))
+        stats += f"{key} => {create_user_mention(member)}\n"
+        print(key)
+
+    await message.reply(stats, parse_mode="Markdown")
+
+    # all_in_chat = []
+
+    # for member in members:
+    #     all_in_chat.append(create_user_mention(member))
+
+    # await bot.send_message(message.chat.id, "\n".join(all_in_chat), parse_mode="Markdown")
+
+
 @dp.message_handler(commands="pidor")
 async def my_rep(message: types.Message):
     chat_id = message.chat.id
