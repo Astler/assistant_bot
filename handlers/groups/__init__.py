@@ -1,4 +1,5 @@
 from .start_group import dp
+from .help import dp
 from .group_bot_settings import dp
 from .group_links_settings import dp
 from .help_group import dp

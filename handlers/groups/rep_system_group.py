@@ -86,7 +86,8 @@ async def rep_msg(message: types.Message):
     mention_change_user = create_user_mention(await message.bot.get_chat_member(chat_id, user_to_update_id))
     mention_sender_user = create_user_mention(await message.bot.get_chat_member(chat_id, user_change_author_id))
 
-    if any(word in message.text for word in positive_rep):
+    if any(word in message.text for word in positive_rep) or str(message.text) == "+" or str(
+            message.text) == "➕" or str(message.text) == "❤":
         user_to_update.reputation += 1
         await message.reply(
             f"Репутация {mention_change_user} *{user_to_update.reputation}* ❤ повышена пользователем {mention_sender_user} *{user_change_author.reputation}* ❤ !",
