@@ -8,7 +8,7 @@ from utils.misc import rate_limit
 
 
 @rate_limit()
-@dp.message_handler(CommandHelp(), IsPrivate(), BotAdminsFilter())
+@dp.message_handler(CommandHelp())
 async def bot_help(message: types.Message):
     text = [
         'Технические',

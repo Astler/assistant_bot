@@ -2,7 +2,6 @@ from .start_group import dp
 from .help import dp
 from .group_bot_settings import dp
 from .group_links_settings import dp
-from .help_group import dp
 from .only_private import dp
 from .hof import dp
 from .minecraft_versions import dp
