@@ -15,7 +15,6 @@ async def message_throttled(message: types.Message, throttled: Throttled):
         await asyncio.sleep(3)
         await msg.delete()
     await asyncio.sleep(delta)
-    await message.delete()
 
 
 class ThrottlingMiddleware(BaseMiddleware):
