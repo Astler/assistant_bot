@@ -1,12 +1,12 @@
-aiogram==2.17.1
+aiogram==2.19
 aiohttp==3.8.1
-python-telegram-bot==13.9
+python-telegram-bot==13.11
 python-dotenv==0.19.2
 Telethon==1.24.0
 PyGithub==1.55
 heroku==0.1.4
 beautifulsoup4==4.10.0
 simplejson==3.17.6
-requests==2.26.0
+requests==2.27.1
 firebase-admin==5.2.0
-pyrogram==1.2.20
+pyrogram==1.4.8
