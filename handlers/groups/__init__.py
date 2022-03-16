@@ -15,6 +15,7 @@ from .choose_hero_system_group import dp
 from .react_on_dots_message import dp
 from .choose_random_item import dp
 from .war_reporter import dp
+from .cowsay import dp
 from .link_spam_group import dp
 
 __all__ = ["dp"]

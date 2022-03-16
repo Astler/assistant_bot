@@ -10,3 +10,4 @@ simplejson==3.17.6
 requests==2.27.1
 firebase-admin==5.2.0
 pyrogram==1.4.8
+cowsay==4.0
