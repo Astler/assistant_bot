@@ -9,7 +9,7 @@ from utils.misc import rate_limit
 from loader import dp, bot
 
 
-@dp.message_handler(commands="cowsay", prefixes="!/")
+@dp.message_handler(commands="cowsay")
 async def cowsay_say(message: types.Message):
     text = message.get_args()
 
