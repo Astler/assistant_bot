@@ -46,7 +46,7 @@ CHATS_ENV = os.getenv("CHATS").split("|")
 
 chats = [int(admin) for admin in CHATS_ENV]
 
-version = "0.3.8.1"
+version = "0.3.8.3"
 
 LINKS_BLACK_LIST_ENV = os.getenv("LINKS_BLACK_LIST")
 
@@ -107,6 +107,7 @@ LINKS_BLACK_LIST, так и в config.py
 0.3.8 - help updated for groups and rep triggers updated
 0.3.8.1 - fixed group help
 0.3.8.2 - fixed trottler
+0.3.8.3 - cowsay
 
 TODO:
 Сейчас бот при блокировке ссылки из ЧС оповещает меня в ЛЮБОМ случае. Это плохо, надо перенести этот функционал на админов конкретного чата
