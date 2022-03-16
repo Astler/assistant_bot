@@ -11,13 +11,13 @@ from loader import dp, bot
 
 @dp.message_handler(commands="cowsay")
 async def cowsay_say(message: types.Message):
-    args = message.get_args().split(" ")
+    args = message.get_args().split(" cow=")
 
     if len(args) == 0:
         return
 
     if len(args) == 1:
-        text = str(args)
+        text = str(args[0])
         character = "cow"
     else:
         text = str(args[0])
