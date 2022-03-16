@@ -14,4 +14,6 @@ async def cowsay_say(message: types.Message):
     text = message.get_args()
 
     if len(text) != 0:
-        await bot.send_message(message.chat.id, cowsay.get_output_string('cow', text))
+        result = cowsay.get_output_string('cow', text)
+        print(result)
+        await bot.send_message(message.chat.id, "```" + result + "```", parse_mode="Markdown")
