@@ -6,34 +6,13 @@ from datetime import date
 from aiogram import types
 
 from handlers.groups.rep_system_group import create_user_mention, get_cat_user
-from loader import dp, bot, app
+from loader import dp, app, bot
 from utils.group_data.data import get_group_dict, save_group_dict
 from utils.group_data.user import CatUser
 
 
-@dp.message_handler(commands="pidor_stats")
-async def my_rep(message: types.Message):
-    chat_id = message.chat.id
-
-    group_settings = get_group_dict(chat_id)
-    all_users = group_settings.users
-
-    stats = ""
-
-    for user_id in all_users:
-        cat_user: CatUser = json.loads(all_users[user_id], object_hook=lambda d: CatUser(**d))
-        try:
-            member = await app.get_chat_member(chat_id, cat_user.user_id)
-            if not member.user.is_bot:
-                stats += f"{create_user_mention(member)} был пидором {cat_user.pidor_times} раз\n"
-        except Exception as e:
-            print(f"exception {e}")
-
-    await message.reply(stats, parse_mode="Markdown")
-
-
-@dp.message_handler(commands="pidor")
-async def my_rep(message: types.Message):
+@dp.message_handler(commands="hero")
+async def hero_of_the_day(message: types.Message):
     chat_id = message.chat.id
 
     group_info = get_group_dict(chat_id)
@@ -49,12 +28,12 @@ async def my_rep(message: types.Message):
         if not member.user.is_bot:
             all_users_in_chat.append(member)
 
-    pidors: dict = group_info.pidors
+    heroes: dict = group_info.heroes
     users: dict = group_info.users
 
     today = str(date.today())
 
-    if not pidors.__contains__(today):
+    if not heroes.__contains__(today):
         await bot.send_message(message.chat.id, "Провожу опрос общих знакомых")
         await asyncio.sleep(1)
         await bot.send_message(message.chat.id, "Спрашиваю ваших родителей")
@@ -63,23 +42,24 @@ async def my_rep(message: types.Message):
         await asyncio.sleep(1)
         await bot.send_message(message.chat.id, "Иду к шаману")
         await asyncio.sleep(1)
-        await bot.send_message(message.chat.id, "Всё, теперь очевидно. Сегодня пидор...")
+        await bot.send_message(message.chat.id, f"Всё, теперь очевидно. Сегодня {group_info.hero_name}...")
         random_user = random.choice(all_users_in_chat)
         user_id = random_user.user.id
-        pidors[today] = user_id
 
-        users[user_id] = json.dumps(get_cat_user(users, user_id).increment_pidor_counter(), cls=CatUser.CatUserEncoder)
+        heroes = {today: user_id}
+
+        users[user_id] = json.dumps(get_cat_user(users, user_id).increment_hero_counter(), cls=CatUser.CatUserEncoder)
 
         await bot.send_message(message.chat.id,
                                f"Это {create_user_mention(await message.bot.get_chat_member(chat_id, user_id))}!",
                                parse_mode="Markdown")
     else:
-        user_id = pidors[today]
+        user_id = heroes[today]
         await bot.send_message(message.chat.id,
-                               f"Сегодняшний ({today}) пидор уже определён! Это {create_user_mention(await message.bot.get_chat_member(chat_id, user_id))}",
+                               f"Сегодняшний ({today}) {group_info.hero_name} уже определён! Это {create_user_mention(await message.bot.get_chat_member(chat_id, user_id))}",
                                parse_mode="Markdown")
 
+    group_info.heroes = heroes
     group_info.users = users
-    group_info.pidors = pidors
 
     save_group_dict(chat_id, group_info)

@@ -1,11 +1,6 @@
 import cowsay
 from aiogram import types
-from aiogram.dispatcher.filters import CommandHelp
-from aiogram.types import ParseMode
 
-from filters import IsPrivate, BotAdminsFilter
-from loader import dp
-from utils.misc import rate_limit
 from loader import dp, bot
 
 

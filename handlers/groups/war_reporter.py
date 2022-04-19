@@ -14,7 +14,7 @@ async def bot_help(message: types.Message):
         await client.start()
 
         input_channels_names = ["‼️СИРЕНА. ДНЕПР‼️", "Astler: Dev", "English Pin 📌"]
-        output_channel_names = ["Сяся осуждает", "Шлендерс и Дед (Царь)"]
+        output_channel_names = ["Сяся осуждает"]
 
         input_channels_entities = []
         output_channel_entities = []
