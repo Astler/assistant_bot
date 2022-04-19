@@ -9,11 +9,12 @@ class CatUser:
     pidor_times = 0
     hero_times = 0
 
-    def __init__(self, user_id=0, reputation=0, last_rep_edit_time=0, pidor_times=0):
+    def __init__(self, user_id=0, reputation=0, last_rep_edit_time=0, pidor_times=0, hero_times=0):
         self.user_id = user_id
         self.reputation = reputation
         self.last_rep_edit_time = last_rep_edit_time
         self.pidor_times = pidor_times
+        self.hero_times = hero_times
 
     def increment_hero_counter(self):
         self.hero_times += 1

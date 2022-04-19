@@ -46,7 +46,7 @@ CHATS_ENV = os.getenv("CHATS").split("|")
 
 chats = [int(admin) for admin in CHATS_ENV]
 
-version = "0.3.9"
+version = "0.3.9.1"
 
 LINKS_BLACK_LIST_ENV = os.getenv("LINKS_BLACK_LIST")
 
@@ -112,6 +112,7 @@ LINKS_BLACK_LIST, так и в config.py
 0.3.8.5 - cowsay hero choose
 0.3.8.5 - cowsay hero choose fix
 0.3.9 - fixed group data use in code. Added custom "hero of the day", redone pidor_stats
+0.3.9.1 - fixes
 
 TODO:
 Сейчас бот при блокировке ссылки из ЧС оповещает меня в ЛЮБОМ случае. Это плохо, надо перенести этот функционал на админов конкретного чата
