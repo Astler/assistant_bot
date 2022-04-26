@@ -17,9 +17,6 @@ async def hero_of_the_day(message: types.Message):
 
     group_info = get_group_dict(chat_id)
 
-    if not group_info.adult_mode:
-        return
-
     members = await app.get_chat_members(message.chat.id)
 
     all_users_in_chat = []

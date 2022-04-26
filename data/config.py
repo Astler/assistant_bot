@@ -61,7 +61,7 @@ if LINKS_BLACK_LIST_ENV is not None:
     links_black_list.extend(LINKS_BLACK_LIST_ENV.split("|"))
 
 
-version = "0.3.9.2"
+version = "0.3.9.3"
 changes = """Изменения
 0.2-0.2.2 - Удалил лишнее, поправил троттлер
 0.2.3 - Добавил чёрный список текста (ссылок), который подлежит удалению. Добавлять можно как через .env 
@@ -114,6 +114,7 @@ LINKS_BLACK_LIST, так и в config.py
 0.3.9 - fixed group data use in code. Added custom "hero of the day", redone pidor_stats
 0.3.9.1 - fixes
 0.3.9.2 - group data fixes
+0.3.9.3 - hero command fix
 
 TODO:
 Сейчас бот при блокировке ссылки из ЧС оповещает меня в ЛЮБОМ случае. Это плохо, надо перенести этот функционал на админов конкретного чата
