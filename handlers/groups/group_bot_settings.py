@@ -12,9 +12,9 @@ from utils.group_data.data import get_group_dict, save_group_dict
 async def bot_settings_start(message: types.Message):
     chat_id = message.chat.id
     group_settings = get_group_dict(chat_id)
-    delete_commands = group_settings.get("delete_commands", True)
-    delete_previous_settings = group_settings.get("delete_previous_settings", True)
-    adult_mode = group_settings.get("adult_mode", False)
+    delete_commands = group_settings.delete_commands
+    delete_previous_settings = group_settings.delete_previous_settings
+    adult_mode = group_settings.adult_mode
 
     if delete_commands:
         await message.delete()
@@ -24,7 +24,7 @@ async def bot_settings_start(message: types.Message):
                                                                           adult_mode))
 
     if delete_previous_settings:
-        settings_msg_last = group_settings.get("last_settings_msg_id", 0)
+        settings_msg_last = group_settings.last_settings_msg_id
 
         group_settings["last_settings_msg_id"] = msg.message_id
         save_group_dict(chat_id, group_settings)
@@ -37,13 +37,13 @@ async def bot_settings_start(message: types.Message):
 async def publish_new_data(query: types.CallbackQuery):
     chat_id = query.message.chat.id
     group_settings = get_group_dict(chat_id)
-    new_delete_commands_value = not group_settings.get("delete_commands", True)
-    group_settings["delete_commands"] = new_delete_commands_value
+    new_delete_commands_value = not group_settings.delete_commands
+    group_settings.delete_commands = new_delete_commands_value
     save_group_dict(chat_id, group_settings)
 
-    delete_commands = group_settings.get("delete_commands", True)
-    delete_previous_settings = group_settings.get("delete_previous_settings", True)
-    adult_mode = group_settings.get("adult_mode", False)
+    delete_commands = group_settings.delete_commands
+    delete_previous_settings = group_settings.delete_previous_settings
+    adult_mode = group_settings.adult_mode
 
     if new_delete_commands_value:
         await query.message.edit_text("Теперь бот будет удалять отправленные ему комманды",
@@ -59,13 +59,13 @@ async def publish_new_data(query: types.CallbackQuery):
 async def publish_new_data(query: types.CallbackQuery):
     chat_id = query.message.chat.id
     group_settings = get_group_dict(chat_id)
-    new_delete_commands_value = not group_settings.get("adult_mode", False)
-    group_settings["adult_mode"] = new_delete_commands_value
+    new_delete_commands_value = not group_settings.adult_mode
+    group_settings.adult_mode = new_delete_commands_value
     save_group_dict(chat_id, group_settings)
 
-    delete_commands = group_settings.get("delete_commands", True)
-    delete_previous_settings = group_settings.get("delete_previous_settings", True)
-    adult_mode = group_settings.get("adult_mode", False)
+    delete_commands = group_settings.delete_commands
+    delete_previous_settings = group_settings.delete_previous_settings
+    adult_mode = group_settings.adult_mode
 
     if new_delete_commands_value:
         await query.message.edit_text("Теперь в боте доступны злые функции",

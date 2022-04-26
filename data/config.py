@@ -46,8 +46,6 @@ CHATS_ENV = os.getenv("CHATS").split("|")
 
 chats = [int(admin) for admin in CHATS_ENV]
 
-version = "0.3.9.1"
-
 LINKS_BLACK_LIST_ENV = os.getenv("LINKS_BLACK_LIST")
 
 links_black_list = [
@@ -62,6 +60,8 @@ links_black_list = [
 if LINKS_BLACK_LIST_ENV is not None:
     links_black_list.extend(LINKS_BLACK_LIST_ENV.split("|"))
 
+
+version = "0.3.9.2"
 changes = """Изменения
 0.2-0.2.2 - Удалил лишнее, поправил троттлер
 0.2.3 - Добавил чёрный список текста (ссылок), который подлежит удалению. Добавлять можно как через .env 
@@ -113,6 +113,7 @@ LINKS_BLACK_LIST, так и в config.py
 0.3.8.5 - cowsay hero choose fix
 0.3.9 - fixed group data use in code. Added custom "hero of the day", redone pidor_stats
 0.3.9.1 - fixes
+0.3.9.2 - group data fixes
 
 TODO:
 Сейчас бот при блокировке ссылки из ЧС оповещает меня в ЛЮБОМ случае. Это плохо, надо перенести этот функционал на админов конкретного чата

@@ -16,11 +16,11 @@ async def my_rep(message: types.Message):
     user_id = message.from_user.id
 
     group_settings = get_group_dict(chat_id)
-    users: dict = group_settings.get("users", {})
+    users: dict = group_settings.users
 
     cat_user_info = get_cat_user(users, user_id)
 
-    is_adult_mode = group_settings.get("adult_mode", False)
+    is_adult_mode = group_settings.adult_mode
 
     mention_user = create_user_mention(await message.bot.get_chat_member(chat_id, user_id))
 
@@ -37,7 +37,7 @@ async def my_rep(message: types.Message):
     chat_id = message.chat.id
 
     group_settings = get_group_dict(chat_id)
-    users: dict = group_settings.get("users", {})
+    users: dict = group_settings.users
 
     users_by_rep = {}
 
@@ -72,7 +72,7 @@ async def rep_msg(message: types.Message):
         return
 
     group_settings = get_group_dict(chat_id)
-    users: dict = group_settings.get("users", {})
+    users: dict = group_settings.users
 
     user_to_update = get_cat_user(users, user_to_update_id)
     user_change_author = get_cat_user(users, user_change_author_id)
@@ -100,7 +100,7 @@ async def rep_msg(message: types.Message):
 
     users[user_to_update_id] = json.dumps(user_to_update, cls=CatUser.CatUserEncoder)
     users[user_change_author_id] = json.dumps(user_change_author, cls=CatUser.CatUserEncoder)
-    group_settings["users"] = users
+    group_settings.users = users
 
     save_group_dict(chat_id, group_settings)
 
