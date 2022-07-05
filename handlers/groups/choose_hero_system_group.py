@@ -7,7 +7,7 @@ from aiogram import types
 
 from handlers.groups.rep_system_group import create_user_mention, get_cat_user
 from loader import dp, bot, app
-from utils.group_data.data import get_group_dict, save_group_dict
+from utils.group_data.data import get_group_info, save_group_dict
 from utils.group_data.user import CatUser
 
 
@@ -15,7 +15,7 @@ from utils.group_data.user import CatUser
 async def my_rep(message: types.Message):
     chat_id = message.chat.id
 
-    group_settings = get_group_dict(chat_id)
+    group_settings = get_group_info(chat_id)
     all_users = group_settings.users
 
     stats = ""
@@ -36,7 +36,7 @@ async def my_rep(message: types.Message):
 async def my_rep(message: types.Message):
     chat_id = message.chat.id
 
-    group_info = get_group_dict(chat_id)
+    group_info = get_group_info(chat_id)
 
     if not group_info.adult_mode:
         return

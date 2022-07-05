@@ -123,8 +123,13 @@ Added /all_members variation: "all_abroad"
 Deleted echo command
 Deleted dots smile
 Updated ban, added rep system keys
+0.4.1 - Spring Clean (at July)
+Updated "Only private" response
+Updated users data
 
 TODO:
-Сейчас бот при блокировке ссылки из ЧС оповещает меня в ЛЮБОМ случае. Это плохо, надо перенести этот функционал на админов конкретного чата
-Кеширование файлов!
+Global user data
+Channel manage
+Better url block system
+Rework user settings
 """

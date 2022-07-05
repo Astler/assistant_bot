@@ -2,16 +2,17 @@ from aiogram import types
 
 from filters import IsGroup
 from loader import dp
+from utils.group_data.data import get_group_info
 from utils.misc import rate_limit
-from utils.user_data.data import delete_simple_commands
+
 
 @rate_limit()
-@dp.message_handler(IsGroup(), commands=["sticker_id"])
-@dp.message_handler(IsGroup(), commands=["id"])
+@dp.message_handler(IsGroup(), commands=["id", "add_channel", "sticker_id"])
 async def get_my_id(message: types.Message):
-    await message.bot.send_message(message.chat.id, "Эта команда срабоатет только в личных сообщениях")
+    await message.answer(f"Команда \"{message.text}\" срабоатет только в личных сообщениях!")
 
-    # TODO Обрабатывать данные для чата, а не конкретного пользователя
-    if delete_simple_commands(message.from_user.id):
+    chat_id = message.chat.id
+    group_info = get_group_info(chat_id)
+
+    if group_info.delete_commands:
         await message.delete()
-

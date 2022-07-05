@@ -7,7 +7,7 @@ from aiogram import types
 
 from handlers.groups.rep_system_group import create_user_mention, get_cat_user
 from loader import dp, app, bot
-from utils.group_data.data import get_group_dict, save_group_dict
+from utils.group_data.data import get_group_info, save_group_dict
 from utils.group_data.user import CatUser
 
 
@@ -15,7 +15,7 @@ from utils.group_data.user import CatUser
 async def hero_of_the_day(message: types.Message):
     chat_id = message.chat.id
 
-    group_info = get_group_dict(chat_id)
+    group_info = get_group_info(chat_id)
 
     members = await app.get_chat_members(message.chat.id)
 

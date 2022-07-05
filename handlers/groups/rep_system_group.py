@@ -4,7 +4,7 @@ from aiogram import types
 
 from filters.is_rep_msg import IsRepMsg, positive_rep
 from loader import dp
-from utils.group_data.data import get_group_dict, save_group_dict, get_cat_user
+from utils.group_data.data import get_group_info, save_group_dict, get_cat_user
 from utils.group_data.user import CatUser
 from utils.misc.common import time_in_millis, create_user_mention
 
@@ -14,7 +14,7 @@ async def my_rep(message: types.Message):
     chat_id = message.chat.id
     user_id = message.from_user.id
 
-    group_settings = get_group_dict(chat_id)
+    group_settings = get_group_info(chat_id)
 
     cat_user_info = get_cat_user(group_settings.users, user_id)
 
@@ -36,7 +36,7 @@ async def my_rep(message: types.Message):
 async def group_rep(message: types.Message):
     chat_id = message.chat.id
 
-    group_settings = get_group_dict(chat_id)
+    group_settings = get_group_info(chat_id)
     users: dict = group_settings.users
 
     users_by_rep = {}
@@ -71,7 +71,7 @@ async def rep_msg(message: types.Message):
         await rep_change_for_self(message)
         return
 
-    group_settings = get_group_dict(chat_id)
+    group_settings = get_group_info(chat_id)
     users: dict = group_settings.users
 
     user_to_update = get_cat_user(users, user_to_update_id)

@@ -19,7 +19,7 @@ async def options(message: types.Message, state: FSMContext):
     msg = await bot.send_message(chat_id=message.chat.id, text="Чтобы добавить бота в свой список - добавьте бота на "
                                                                "свой канал и предоставьте ему права админа. После "
                                                                "этого перешлите сообщение из этого канала. Если всё "
-                                                               "будет в норме - бот будет добавлен.",
+                                                               "сделано - канал будет добавлен.",
                                  reply_markup=add_channel_keyboard)
 
     async with state.proxy() as data:
