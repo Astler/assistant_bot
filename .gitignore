@@ -146,3 +146,5 @@ dmypy.json
 /groups/
 /cat_pyro.session
 /cat_pyro.session-journal
+/.idea/assistant_bot.iml
+/.idea/workspace.xml

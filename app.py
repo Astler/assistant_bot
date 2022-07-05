@@ -4,6 +4,7 @@ from aiogram.utils.executor import start_webhook
 from pyrogram import Client
 from telethon.tl.types import InputChannel
 
+from utils.minecraft.be_version_updater import be_version_push, be_version_get
 from utils.set_bot_commands import set_default_commands
 from loader import bot, app
 from telethon import TelegramClient, events
@@ -23,6 +24,8 @@ async def on_startup(dp):
     filters.setup(dp)
     middlewares.setup(dp)
     logging.info(dp)
+
+    await be_version_push(await be_version_get())
 
     from utils.notify_admins import on_startup_notify
     await on_startup_notify(dp)
