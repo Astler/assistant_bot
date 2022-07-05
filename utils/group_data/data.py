@@ -76,6 +76,7 @@ def get_local_dict(group_id: int):
 
 def save_local_dict(group_id: int, group_info: GroupInfo):
     filename = get_local_file(group_id)
+
     if not os.path.exists(os.path.dirname(filename)):
         try:
             os.makedirs(os.path.dirname(filename))

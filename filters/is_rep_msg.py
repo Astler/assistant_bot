@@ -22,6 +22,6 @@ negative_rep = [
 
 class IsRepMsg(BoundFilter):
     async def check(self, message: types.Message):
-        return any(word in message.text for word in positive_rep) or any(
-            word in message.text for word in negative_rep) or str(message.text) == "+" or str(
-            message.text) == "-" or str(message.text) == "➕" or str(message.text) == "❤"
+        text = message.text.lower()
+        return any(word in text for word in positive_rep) or any(
+            word in text for word in negative_rep) or text == "+" or text == "-" or text == "➕" or text == "❤"

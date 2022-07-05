@@ -25,6 +25,7 @@ class GroupInfo:
         info.users = json_dct.get("users", info.users)
         info.heroes = json_dct.get("heroes", info.heroes)
         info.adult_mode = json_dct.get("adult_mode", info.adult_mode)
+        info.pidors = json_dct.get("pidors", info.pidors)
         info.delete_previous_settings = json_dct.get("delete_previous_settings", info.delete_previous_settings)
 
         return info

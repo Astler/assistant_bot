@@ -43,7 +43,7 @@ async def my_rep(message: types.Message):
 
     all_in_chat = []
 
-    async for member in app.get_chat_members(message.chat.id):
+    async for member in app.get_chat_members(chat_id):
         if not member.user.is_bot:
             all_in_chat.append(member)
 
