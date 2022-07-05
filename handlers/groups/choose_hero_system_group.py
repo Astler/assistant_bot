@@ -11,7 +11,7 @@ from utils.group_data.data import get_group_dict, save_group_dict
 from utils.group_data.user import CatUser
 
 
-@dp.message_handler(commands="pidor_stats")
+@dp.message_handler(commands=["pidor_stats", "ps"])
 async def my_rep(message: types.Message):
     chat_id = message.chat.id
 
@@ -32,7 +32,7 @@ async def my_rep(message: types.Message):
     await message.reply(stats, parse_mode="Markdown")
 
 
-@dp.message_handler(commands="pidor")
+@dp.message_handler(commands=["pidor", "p"])
 async def my_rep(message: types.Message):
     chat_id = message.chat.id
 
@@ -41,13 +41,11 @@ async def my_rep(message: types.Message):
     if not group_info.adult_mode:
         return
 
-    members = await app.get_chat_members(message.chat.id)
+    all_in_chat = []
 
-    all_users_in_chat = []
-
-    for member in members:
+    async for member in app.get_chat_members(message.chat.id):
         if not member.user.is_bot:
-            all_users_in_chat.append(member)
+            all_in_chat.append(member)
 
     pidors: dict = group_info.pidors
     users: dict = group_info.users
@@ -64,7 +62,7 @@ async def my_rep(message: types.Message):
         await bot.send_message(message.chat.id, "Иду к шаману")
         await asyncio.sleep(1)
         await bot.send_message(message.chat.id, "Всё, теперь очевидно. Сегодня пидор...")
-        random_user = random.choice(all_users_in_chat)
+        random_user = random.choice(all_in_chat)
         user_id = random_user.user.id
         pidors[today] = user_id
 

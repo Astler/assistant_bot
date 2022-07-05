@@ -61,7 +61,7 @@ if LINKS_BLACK_LIST_ENV is not None:
     links_black_list.extend(LINKS_BLACK_LIST_ENV.split("|"))
 
 
-version = "0.3.9.4"
+version = "0.4"
 
 changes = """Изменения
 0.2-0.2.2 - Удалил лишнее, поправил троттлер
@@ -117,6 +117,12 @@ LINKS_BLACK_LIST, так и в config.py
 0.3.9.2 - group data fixes
 0.3.9.3 - hero command fix
 0.3.9.4 - updated BE version check logic
+0.4 - Friendly Update!
+Updated minecraft_versions and choose_random_item features to work in private and fixes bugs with them. Also added common handlers dit for commands
+Added /all_members variation: "all_abroad"
+Deleted echo command
+Deleted dots smile
+Updated ban, added rep system keys
 
 TODO:
 Сейчас бот при блокировке ссылки из ЧС оповещает меня в ЛЮБОМ случае. Это плохо, надо перенести этот функционал на админов конкретного чата

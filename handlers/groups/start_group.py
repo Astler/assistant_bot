@@ -7,4 +7,4 @@ from loader import dp
 
 @dp.message_handler(CommandStart(), IsGroup())
 async def bot_start(message: types.Message):
-    await message.answer(f'Приступаю к работе в чате {message.chat.full_name}!')
+    await message.answer(f'Я уже тут, в чате {message.chat.full_name}!')

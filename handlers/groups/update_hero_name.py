@@ -5,13 +5,13 @@ from loader import dp, bot
 from utils.group_data.data import get_group_dict, save_group_dict
 
 
-@dp.message_handler(AdminFilter(), commands="edit_hero_name")
+@dp.message_handler(AdminFilter(), commands=["edit_hero_name", "set_hero_name"])
 async def hero_of_the_day(message: types.Message):
     new_name = message.get_args()
 
     if len(new_name) == 0:
         await bot.send_message(message.chat.id, "Так не сработает. Введите имя сразу после команды в формате: "
-                                                "/edit_hero_name Новое имя")
+                                                "/set_hero_name Новое имя")
         return
 
     chat_id = message.chat.id

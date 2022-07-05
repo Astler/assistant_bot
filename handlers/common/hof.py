@@ -4,7 +4,6 @@ import simplejson as json
 from aiogram import types
 from aiogram.types import ParseMode
 
-from filters import IsGroup
 from loader import dp, bot
 from utils.misc import rate_limit
 
@@ -16,7 +15,7 @@ class HOFItem:
 
 
 @rate_limit()
-@dp.message_handler(IsGroup(), commands="hof")
+@dp.message_handler(commands="hof")
 async def get_hof(message: types.Message):
     msg = await bot.send_message(message.chat.id, "Начинаю загрузку данных HOF...")
 

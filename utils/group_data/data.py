@@ -5,6 +5,17 @@ from github import GithubException
 
 from loader import repository
 from utils.group_data.group_info import GroupInfo
+from utils.group_data.user import CatUser
+
+
+def get_cat_user(users: dict, user_id: int):
+    if users.__contains__(str(user_id)):
+        user_json = users[str(user_id)]
+        print(f"has user = {user_json}")
+        return json.loads(user_json, object_hook=lambda d: CatUser(**d))
+    else:
+        print(f"new user!!")
+        return CatUser(user_id)
 
 
 def get_group_dict(group_id: int) -> GroupInfo:

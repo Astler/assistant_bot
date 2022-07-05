@@ -1,5 +1,3 @@
-import asyncio
-
 from aiogram import types
 
 from loader import dp, bot
@@ -35,4 +33,3 @@ async def new_chat_title(m: types.Message):
 @dp.message_handler(content_types=types.ContentType.NEW_CHAT_PHOTO)
 async def new_chat_photo(m: types.Message):
     await m.delete()
-

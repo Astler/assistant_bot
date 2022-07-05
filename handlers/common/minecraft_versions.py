@@ -4,13 +4,12 @@ import urllib.request
 from aiogram import types
 
 from data.config import APPS_DATA_ROOT_URL, BE_VERSIONS_FILE
-from filters import IsGroup
 from keyboards.minecraft_keyboards import minecraft_versions_keyboard
 from loader import dp
 
 
-@dp.message_handler(IsGroup(), commands="minecraft_versions")
-async def bot_echo(message: types.Message):
+@dp.message_handler(commands=["minecraft_versions", "mv"])
+async def mine_versions(message: types.Message):
     answer = await message.answer("Так, ищем версию... ")
 
     versions_dict = {}
@@ -42,8 +41,8 @@ async def bot_echo(message: types.Message):
         release = str(release_raw).replace("_(Bedrock_Edition)", "")
         snapshot = str(snapshot_raw).replace("_(Bedrock_Edition)", "")
 
-        versions_dict[f"{release} BE"] = release_raw
-        versions_dict[f"{snapshot} BE"] = snapshot_raw
+        versions_dict[f"{release}"] = release_raw
+        versions_dict[f"{snapshot}"] = snapshot_raw
 
         text += f"\n\nПоследняя релизная версия BE: {release}, а снапшот: {snapshot}."
 
