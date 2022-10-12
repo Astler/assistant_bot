@@ -1,0 +1,10 @@
+version: "1"
+
+networks:
+    default:
+        external: true
+
+services:
+   default:
+        ports:
+            - "49998:49998"
