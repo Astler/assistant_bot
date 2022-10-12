@@ -1,5 +1,5 @@
-docker stop admin.test
-docker rm admin.test
+docker stop cat.bot
+docker rm cat.bot
 
 app="cat.bot"
 docker build -t ${app} .
