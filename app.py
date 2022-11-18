@@ -1,18 +1,13 @@
+import logging
 import os
 
 from aiogram.utils.executor import start_webhook
-from pyrogram import Client
-from telethon.tl.types import InputChannel
-
-from utils.minecraft.be_version_updater import be_version_push, be_version_get
-from utils.set_bot_commands import set_default_commands
-from loader import bot, app
-from telethon import TelegramClient, events
-
-import logging
 
 from data.config import (WEBHOOK_URL, WEBHOOK_PATH,
-                         WEBAPP_HOST, WEBAPP_PORT, BOT_TOKEN, API_ID, API_HASH)
+                         WEBAPP_HOST, WEBAPP_PORT)
+from loader import bot, app
+from utils.minecraft.be_version_updater import be_version_push, be_version_get
+from utils.set_bot_commands import set_default_commands
 
 
 async def on_startup(dp):
