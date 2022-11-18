@@ -61,7 +61,7 @@ if LINKS_BLACK_LIST_ENV is not None:
     links_black_list.extend(LINKS_BLACK_LIST_ENV.split("|"))
 
 
-version = "0.4.3"
+version = "0.4.3.1"
 
 changes = """Изменения
 0.2-0.2.2 - Удалил лишнее, поправил троттлер
@@ -131,6 +131,7 @@ Fixed "hero of day" command
 Fixed no lowercase cast in rep keywords
 0.4.2 - Bye heroku!
 0.4.3 - added passgen command. Just to create random passwords, idk
+0.4.3 - pasgen fix
 
 
 TODO:
