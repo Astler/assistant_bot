@@ -13,15 +13,18 @@ acceptable_chars = ["!", "?", "#", "_"]
 
 @dp.message_handler(commands="passgen")
 async def cowsay_say(message: types.Message):
-    args = message.get_args().split(" ")
+    args = message.get_args()
 
     size = 8
 
-    if len(args) == 1:
-        try:
-            size = int(args[0])
-        except:
-            await bot.send_message(message.chat.id, f"error parsing {args[0]} D:")
+    if not args.isspace():
+        args = args.split(" ")
+
+        if len(args) == 1:
+            try:
+                size = int(args[0])
+            except:
+                await bot.send_message(message.chat.id, f"error parsing {args[0]} D:")
 
     step = int(size / 4)
     overstep = size % 4
