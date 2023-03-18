@@ -10,6 +10,8 @@ API_ID = os.getenv("API_ID")
 API_HASH = os.getenv("API_HASH")
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN_KEY")
+INSTANCE_UNIQUE_NAME = os.getenv("INSTANCE_UNIQUE_NAME")
+PHONE_NUMBER = os.getenv("PHONE_NUMBER")
 GITHUB_REPO = os.getenv("GITHUB_REPO")
 A_PATH = os.getenv('A_PATH')
 
@@ -61,7 +63,7 @@ if LINKS_BLACK_LIST_ENV is not None:
     links_black_list.extend(LINKS_BLACK_LIST_ENV.split("|"))
 
 
-version = "0.4.3.2"
+version = "0.4.4.1"
 
 changes = """Изменения
 0.2-0.2.2 - Удалил лишнее, поправил троттлер
@@ -134,6 +136,7 @@ Fixed no lowercase cast in rep keywords
 0.4.3.1 - pasgen fix
 0.4.3.2 - base /pasgen finished
 0.4.4 - fixed minecraft wiki parser
+0.4.4.1 - started listener rework
 
 
 TODO:

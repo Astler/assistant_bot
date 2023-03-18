@@ -13,7 +13,6 @@ from .choose_hero_system_group import dp
 from .all_users_in_chat import dp
 from .choose_today_hero import dp
 from .update_hero_name import dp
-from .war_reporter import dp
 from .link_spam_group import dp
 
 __all__ = ["dp"]
