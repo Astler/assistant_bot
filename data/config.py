@@ -133,6 +133,7 @@ Fixed no lowercase cast in rep keywords
 0.4.3 - added passgen command. Just to create random passwords, idk
 0.4.3.1 - pasgen fix
 0.4.3.2 - base /pasgen finished
+0.4.4 - fixed minecraft wiki parser
 
 
 TODO:
