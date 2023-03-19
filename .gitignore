@@ -150,3 +150,5 @@ dmypy.json
 /.idea/workspace.xml
 /Ashe - Assistant + anet.session
 /Ashe - Assistant --.session
+/Ashe - User Assistant.session
+/.idea/
