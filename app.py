@@ -1,8 +1,12 @@
+import asyncio
+import datetime
 import logging
 import os
 
+import aioschedule as aioschedule
 from aiogram.utils.executor import start_webhook
 
+from bot.listener.listener import try_to_start_listener
 from data.config import (WEBHOOK_URL, WEBHOOK_PATH,
                          WEBAPP_HOST, WEBAPP_PORT)
 from loader import bot, app
@@ -21,10 +25,26 @@ async def on_startup(dp):
     logging.info(dp)
 
     await be_version_push(await be_version_get())
+    await try_to_start_listener()
 
     from utils.notify_admins import on_startup_notify
     await on_startup_notify(dp)
     await set_default_commands(dp)
+
+    asyncio.ensure_future(scheduler_combined())
+
+
+async def combined_task():
+    now = datetime.datetime.now()
+    if now.minute == 0:
+        await be_version_push(await be_version_get())
+
+
+async def scheduler_combined():
+    aioschedule.every().minute.do(combined_task)
+    while True:
+        await aioschedule.run_pending()
+        await asyncio.sleep(1)
 
 
 async def on_shutdown(dp):
@@ -41,6 +61,11 @@ async def on_shutdown(dp):
 
 if __name__ == '__main__':
     from aiogram import executor
+
+    # new!
+    from bot import dp
+
+    # old!
     from handlers import dp
 
     path = os.getcwd() + "/users/"
@@ -54,10 +79,4 @@ if __name__ == '__main__':
 
     app.start()
 
-    if "HEROKU" in list(os.environ.keys()):
-        start_webhook(dispatcher=dp, webhook_path=WEBHOOK_PATH,
-                      on_startup=on_startup, on_shutdown=on_shutdown,
-                      host=WEBAPP_HOST, port=WEBAPP_PORT)
-    else:
-        executor.start_polling(dispatcher=dp,
-                               on_startup=on_startup, on_shutdown=on_shutdown, )
+    executor.start_polling(dispatcher=dp, on_startup=on_startup, on_shutdown=on_shutdown, )

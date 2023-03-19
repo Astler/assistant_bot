@@ -6,18 +6,22 @@ load_dotenv()
 
 BOT_TOKEN = os.getenv("TOKEN_KEY")
 
+MY_PROFILE_ID = os.getenv("MY_PROFILE_ID")
+
 API_ID = os.getenv("API_ID")
 API_HASH = os.getenv("API_HASH")
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN_KEY")
 INSTANCE_UNIQUE_NAME = os.getenv("INSTANCE_UNIQUE_NAME")
-PHONE_NUMBER = os.getenv("PHONE_NUMBER")
+HOF_URL = os.getenv("HOF_URL")
 GITHUB_REPO = os.getenv("GITHUB_REPO")
 A_PATH = os.getenv('A_PATH')
 
 FTP_URL = os.getenv('FTP_URL')
 FTP_USER = os.getenv('FTP_USER')
 FTP_PASS = os.getenv('FTP_PASS')
+
+HOF_FILE = os.getenv('HOF_FILE')
 
 BANNERS_MAP_FILE = os.getenv('BANNERS_MAP_FILE')
 BE_VERSIONS_FILE = os.getenv('BE_VERSIONS_FILE')
@@ -63,7 +67,7 @@ if LINKS_BLACK_LIST_ENV is not None:
     links_black_list.extend(LINKS_BLACK_LIST_ENV.split("|"))
 
 
-version = "0.4.4.2"
+version = "0.4.5"
 
 changes = """Изменения
 0.2-0.2.2 - Удалил лишнее, поправил троттлер
@@ -133,11 +137,12 @@ Fixed "hero of day" command
 Fixed no lowercase cast in rep keywords
 0.4.2 - Bye heroku!
 0.4.3 - added passgen command. Just to create random passwords, idk
-0.4.3.1 - pasgen fix
-0.4.3.2 - base /pasgen finished
+0.4.3.1 - passgen fix
+0.4.3.2 - base /passgen finished
 0.4.4 - fixed minecraft wiki parser
 0.4.4.1 - started listener rework
 0.4.4.2 - listener WIP2, updated libs
+0.4.5 - updated project hierarchy, updated dev commands, finished test version of channels listener
 
 
 TODO:

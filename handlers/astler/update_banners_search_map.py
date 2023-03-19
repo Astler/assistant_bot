@@ -90,7 +90,7 @@ async def publish_new_data(query: types.CallbackQuery, state: FSMContext):
     file = open(BANNERS_MAP_FILE, 'rb')
 
     with ftplib.FTP(FTP_URL, FTP_USER, FTP_PASS) as ftp, file:
-        ftp.storbinary(f'STOR /www/astler.net/apps_data/{file.name}', file)
+        ftp.storbinary(f'STOR /astler.net/apps_data/{file.name}', file)
 
     await bot.edit_message_text(f"Данные обновлены!\n\n", query.message.chat.id, msg,
                                 reply_markup=check_keyboard(APPS_DATA_ROOT_URL + BANNERS_MAP_FILE))

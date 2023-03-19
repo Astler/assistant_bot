@@ -1,9 +1,12 @@
-import ftplib
 import logging
+
 import requests
 import simplejson as json
 from bs4 import BeautifulSoup
-from data.config import BE_VERSIONS_FILE, FTP_URL, FTP_USER, FTP_PASS
+
+from cat.utils.ftp_utils import upload_file_to_folder
+from cat.utils.json_utils import generate_json_string
+from data.config import BE_VERSIONS_FILE
 from loader import dp
 from utils.notify_admins import send_msg_to_admin
 
@@ -53,13 +56,6 @@ def encode_complex(obj):
     raise TypeError(repr(obj) + " is not JSON serializable")
 
 
-def generate_json_string(item):
-    logging.info("encode data")
-    return json.JSONEncoder(
-        default=encode_complex, sort_keys=True, indent=4 * ' ', ensure_ascii=False
-    ).encode(item)
-
-
 def save_local_file(json_data):
     logging.info("write file to store")
     with open(BE_VERSIONS_FILE, "w", encoding='utf-8') as f:
@@ -68,18 +64,20 @@ def save_local_file(json_data):
 
 def upload_to_astler_net():
     logging.info("store file to astler.net")
-    with ftplib.FTP(FTP_URL, FTP_USER, FTP_PASS) as ftp, open(BE_VERSIONS_FILE, 'rb') as file:
-        ftp.storbinary(f'STOR /www/astler.net/apps_data/{file.name}', file)
+    upload_file_to_folder(BE_VERSIONS_FILE)
 
 
 async def be_version_get():
     all_lines = fetch_be_versions()
     item = find_versions(all_lines)
-    json_data = generate_json_string(item)
+    json_data = generate_json_string(item, encode_complex)
     return json_data
 
 
 async def be_version_push(json_data):
     save_local_file(json_data)
     upload_to_astler_net()
-    await send_msg_to_admin(dp, f"Обновлены данные версий BE:\n{json_data}!")
+
+    parsed = json.loads(json_data)
+
+    await send_msg_to_admin(dp, f"Обновлены данные версий BE: {parsed['release']} {parsed['snapshot']}!")
