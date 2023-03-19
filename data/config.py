@@ -67,7 +67,7 @@ if LINKS_BLACK_LIST_ENV is not None:
     links_black_list.extend(LINKS_BLACK_LIST_ENV.split("|"))
 
 
-version = "0.4.5.1"
+version = "0.4.5.2"
 
 changes = """Изменения
 0.2-0.2.2 - Удалил лишнее, поправил троттлер
@@ -144,6 +144,7 @@ Fixed no lowercase cast in rep keywords
 0.4.4.2 - listener WIP2, updated libs
 0.4.5 - updated project hierarchy, updated dev commands, finished test version of channels listener
 0.4.5.1 - fixed missed requirements
+0.4.5.2 - docker input fix
 
 TODO:
 Global user data
