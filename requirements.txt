@@ -11,3 +11,4 @@ firebase-admin==6.1.0
 pyrogram==2.0.102
 cowsay==5.0
 TgCrypto==1.2.5
+aioschedule==0.5.2
