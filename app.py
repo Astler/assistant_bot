@@ -4,28 +4,22 @@ import logging
 import os
 
 import aioschedule as aioschedule
-from aiogram.utils.executor import start_webhook
 
 from bot.listener.listener import try_to_start_listener
-from data.config import (WEBHOOK_URL, WEBHOOK_PATH,
-                         WEBAPP_HOST, WEBAPP_PORT)
 from loader import bot, app
 from utils.minecraft.be_version_updater import be_version_push, be_version_get
 from utils.set_bot_commands import set_default_commands
 
 
 async def on_startup(dp):
-    await bot.delete_webhook()
-    await bot.set_webhook(WEBHOOK_URL)
-
     import filters
     import middlewares
     filters.setup(dp)
     middlewares.setup(dp)
     logging.info(dp)
 
-    await be_version_push(await be_version_get())
     await try_to_start_listener()
+    await be_version_push(await be_version_get())
 
     from utils.notify_admins import on_startup_notify
     await on_startup_notify(dp)
@@ -77,6 +71,6 @@ if __name__ == '__main__':
     else:
         print("Successfully created the directory %s " % path)
 
-    app.start()
+    # app.start()
 
-    executor.start_polling(dispatcher=dp, on_startup=on_startup, on_shutdown=on_shutdown, )
+    executor.start_polling(dispatcher=dp, on_startup=on_startup, on_shutdown=on_shutdown)

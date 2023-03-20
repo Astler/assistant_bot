@@ -76,8 +76,10 @@ async def be_version_get():
 
 async def be_version_push(json_data):
     save_local_file(json_data)
+    print("save_local_file")
     upload_to_astler_net()
+    print("upload_to_astler_net")
 
     parsed = json.loads(json_data)
-
+    print(parsed)
     await send_msg_to_admin(dp, f"Обновлены данные версий BE: {parsed['release']} {parsed['snapshot']}!")

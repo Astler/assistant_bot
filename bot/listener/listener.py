@@ -1,69 +1,95 @@
 import asyncio
+import logging
 
-from telethon import TelegramClient, events
-from telethon.tl.types import InputChannel
+import pyrogram
+from pyrogram import Client, errors
+
+from aiogram.utils import exceptions as tg_exceptions
+from pyrogram.types import Message
 
 from cat.utils.telegram_utils import send_telegram_msg_to_me
-from data.config import INSTANCE_UNIQUE_NAME, API_ID, API_HASH
+from data.config import API_ID, API_HASH, INSTANCE_UNIQUE_NAME
 from loader import bot
 
 output_channel_id = -1001216924947
 
-input_channel_ids = [-1001234567890, -1001234567891]
+should_stop_pyro = False
+pyro_task = None
+user_app: Client = Client(INSTANCE_UNIQUE_NAME + " Listener", API_ID, API_HASH)
 
 
 async def try_to_sign_in(phone_number) -> bool:
-    client = TelegramClient(INSTANCE_UNIQUE_NAME, API_ID, API_HASH)
+    global user_app
 
     send_telegram_msg_to_me("Visit console to continue! Then try again /listen")
-    await client.connect()
-    await client.start(phone=phone_number)
 
-    if await client.is_user_authorized():
-        await setup_listener(client)
-        return True
+    if user_app.is_connected:
+        await user_app.disconnect()
+
+    user_app = Client(INSTANCE_UNIQUE_NAME + " Listener", API_ID, API_HASH, phone_number=phone_number)
+
+    await user_app.start()
+
+    return await try_to_start_listener(user_app)
+
+
+async def on_channel_post(client, message: Message):
+    global should_stop_pyro
+    print(f"m {message.chat}")
+
+    try:
+        await bot.forward_message(chat_id=output_channel_id, message_id=message.id, from_chat_id=message.chat.id)
+    except Exception as e:
+        print(e)
+        await user_app.forward_messages(chat_id=output_channel_id, message_ids=message.id, from_chat_id=message.chat.id)
+    print(f"[{message.chat.title}] {message.text}")
+
+
+async def run_pyrogram():
+    global should_stop_pyro
+    try:
+        await user_app.start()
+    except tg_exceptions.NetworkError:
+        logging.exception("Failed to connect to Telegram servers")
+        return
+    while not should_stop_pyro:
+        await asyncio.sleep(1)
+    await user_app.stop()
+
+
+async def try_to_start_listener(client: Client = None) -> bool:
+    global user_app, pyro_task
+
+    if client is None:
+        if user_app.is_connected:
+            await user_app.disconnect()
+        user_app = Client(INSTANCE_UNIQUE_NAME + " Listener", API_ID, API_HASH)
+        await user_app.connect()
     else:
-        send_telegram_msg_to_me("Something went wrong")
+        user_app = client
+
+    try:
+        await user_app.get_me()
+    except (
+            errors.ActiveUserRequired,
+            errors.AuthKeyInvalid,
+            errors.AuthKeyPermEmpty,
+            errors.AuthKeyUnregistered,
+            errors.AuthKeyDuplicated,
+            errors.SessionExpired,
+            errors.SessionPasswordNeeded,
+            errors.SessionRevoked,
+            errors.UserDeactivated,
+            errors.UserDeactivatedBan,
+    ):
+        print("Session invalid / Login failed")
         return False
+    else:
+        if not user_app.is_initialized:
+            await user_app.disconnect()
+            await user_app.start()
 
-async def try_to_start_listener() -> bool:
-    client = TelegramClient(INSTANCE_UNIQUE_NAME, API_ID, API_HASH)
-    await client.connect()
-
-    if await client.is_user_authorized():
-        await client.start()
-        send_telegram_msg_to_me("Listener started!")
-        await setup_listener(client)
+        print('Login successfully')
+        pyro_task = asyncio.ensure_future(run_pyrogram())
+        user_app.add_handler(pyrogram.handlers.MessageHandler(on_channel_post, pyrogram.filters.channel))
         return True
-
-    return False
-
-
-async def setup_listener(client):
-    input_channels = await get_input_channels(client)
-
-    @client.on(events.NewMessage(chats=input_channels))
-    async def forward_messages(event):
-        try:
-            await bot.forward_message(output_channel_id, event.chat_id, event.message.id)
-        except:
-            await client.forward_messages(output_channel_id, event.message)
-
-    asyncio.create_task(client.run_until_disconnected())
-
-
-async def get_input_channels(client):
-    input_channels_names = ["‼️СИРЕНА. ДНЕПР‼️", "Astler: Dev", "English Pin 📌"]
-
-    input_channels_entities = []
-
-    async for d in client.iter_dialogs():
-        if d.name in input_channels_names:  # or d.entity.id in config["input_channel_ids"]:
-            input_channels_entities.append(InputChannel(d.entity.id, d.entity.access_hash))
-
-
-    if not input_channels_entities:
-        print(f"Could not find any input channels in the user's dialogs")
-        return []
-
-    return input_channels_entities

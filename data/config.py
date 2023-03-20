@@ -38,12 +38,6 @@ if not BOT_TOKEN:
     print('You have forgot to set BOT_TOKEN ' + str(BOT_TOKEN) + '?')
     quit()
 
-WEBHOOK_HOST = f'https://catassistantbot.herokuapp.com'
-WEBHOOK_PATH = f'/webhook/{BOT_TOKEN}'
-WEBHOOK_URL = f'{WEBHOOK_HOST}{WEBHOOK_PATH}'
-
-WEBAPP_HOST = '0.0.0.0'
-WEBAPP_PORT = 0
 
 if not str(os.getenv('PORT')).__contains__("None"):
     WEBAPP_PORT = os.getenv('PORT', default=8000)
@@ -67,7 +61,7 @@ if LINKS_BLACK_LIST_ENV is not None:
     links_black_list.extend(LINKS_BLACK_LIST_ENV.split("|"))
 
 
-version = "0.4.5.3"
+version = "0.4.5.4"
 
 changes = """Изменения
 0.2-0.2.2 - Удалил лишнее, поправил троттлер
@@ -146,6 +140,7 @@ Fixed no lowercase cast in rep keywords
 0.4.5.1 - fixed missed requirements
 0.4.5.2 - docker input fix
 0.4.5.3 - docker input fix #2
+0.4.5.4 - listener fixes, moved to pyrogram
 
 TODO:
 Global user data
