@@ -7,7 +7,7 @@ from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.types import ParseMode
 from aiogram.utils.markdown import escape_md
 
-from cat.utils.file_utils import save_file
+from cat.utils.files_utils import save_local_file
 from cat.utils.ftp_utils import upload_file_to_folder
 from cat.utils.json_utils import generate_json_string
 from data.config import HOF_FILE
@@ -219,7 +219,7 @@ async def start_removing_item(call: types.CallbackQuery, state: FSMContext):
         hof_array = data[HofEditingKeys.hof_array]
 
     try:
-        save_file(HOF_FILE, generate_json_string(hof_array, encode_hof))
+        save_local_file(HOF_FILE, generate_json_string(hof_array, encode_hof))
         upload_file_to_folder(HOF_FILE)
 
         await remove_item_message.edit_text(f"Succeed!\n")

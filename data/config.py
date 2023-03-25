@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BOT_TOKEN = os.getenv("TOKEN_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 MY_PROFILE_ID = os.getenv("MY_PROFILE_ID")
 
@@ -61,7 +62,7 @@ if LINKS_BLACK_LIST_ENV is not None:
     links_black_list.extend(LINKS_BLACK_LIST_ENV.split("|"))
 
 
-version = "0.4.5.4"
+version = "0.4.6"
 
 changes = """Изменения
 0.2-0.2.2 - Удалил лишнее, поправил троттлер
@@ -141,6 +142,7 @@ Fixed no lowercase cast in rep keywords
 0.4.5.2 - docker input fix
 0.4.5.3 - docker input fix #2
 0.4.5.4 - listener fixes, moved to pyrogram
+0.4.6 - open ai playground and listener improvements
 
 TODO:
 Global user data
