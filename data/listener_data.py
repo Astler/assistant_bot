@@ -5,7 +5,7 @@ from cat.utils.git_utils import push_git_data, get_cached_git
 
 class ChatToListenData(Serializable):
     chat_id = 0
-    hash_tags = []
+    hash_tags = ""
 
     def __init__(self, chat_id=0):
         self.chat_id = chat_id

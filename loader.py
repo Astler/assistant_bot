@@ -4,7 +4,7 @@ from github import Github
 from pyrogram import Client
 
 from data import config
-from data.config import GITHUB_TOKEN, GITHUB_REPO, BOT_TOKEN, API_ID, API_HASH, INSTANCE_UNIQUE_NAME
+from data.config import GITHUB_TOKEN, GITHUB_REPO, BOT_TOKEN, API_ID, API_HASH, INSTANCE_UNIQUE_NAME, OPENAI_API_KEY
 
 bot = Bot(token=config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
 storage = MemoryStorage()
@@ -19,3 +19,7 @@ app = Client(
     api_id=API_ID,
     api_hash=API_HASH
 )
+
+import openai
+
+openai.api_key = OPENAI_API_KEY

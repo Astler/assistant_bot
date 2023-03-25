@@ -8,46 +8,15 @@ from aiogram.utils import exceptions as tg_exceptions
 from pyrogram.types import Message
 
 from cat.utils.telegram_utils import send_telegram_msg_to_me
-from data.config import API_ID, API_HASH, INSTANCE_UNIQUE_NAME, OPENAI_API_KEY
+from data.config import API_ID, API_HASH, INSTANCE_UNIQUE_NAME
 from data.listener_data import get_listener_data
 from loader import bot
-
-import openai
-
-openai.api_key = OPENAI_API_KEY
 
 output_channel_id = -1001868505373
 
 should_stop_pyro = False
 pyro_task = None
 user_app: Client = Client(INSTANCE_UNIQUE_NAME + " Listener", API_ID, API_HASH)
-
-
-def classify_message(text):
-    prompt = f"""I am an AI language model. My task is to classify the following Telegram message into the applicable categories: 'Advertisement', 'Android', 'Unity', 'Development'. A message can belong to multiple categories.
-
-Text: {text}
-
-Please note that:
-- 'Advertisement' refers to messages promoting products or services.
-- 'Android' refers to messages related to the Android platform or Android apps.
-- 'Unity' refers to messages related to the Unity game engine or Unity projects.
-- 'Development' refers to messages related to software development, programming, or coding.
-- 'Memes' refers to messages containing humorous images, videos, or text.
-
-Categories: """
-
-    response = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=prompt,
-        max_tokens=100,
-        n=1,
-        stop=None,
-        temperature=0.5,
-    )
-
-    categories = response.choices[0].text.strip().split(', ')
-    return categories
 
 
 async def try_to_sign_in(phone_number) -> bool:
@@ -73,7 +42,8 @@ async def on_channel_post(client, message: Message):
     if message.chat.id not in listener_data.chats_to_listen:
         return
 
-    tags = classify_message(message.text)
+    chat = listener_data.chats_to_listen[message.chat.id]
+    tags = chat.hash_tags
 
     try:
         await bot.send_message(chat_id=output_channel_id, text=f"tags {tags}")
