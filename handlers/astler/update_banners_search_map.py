@@ -8,7 +8,7 @@ from aiogram.dispatcher.filters.state import StatesGroup, State
 from firebase_admin import credentials, firestore
 
 from data.config import FTP_URL, FTP_USER, FTP_PASS, APPS_DATA_ROOT_URL, PROJECT_ID, BANNERS_MAP_FILE
-from filters import IsPrivate, BotAdminsFilter
+from filters import IsPrivate, BotSuperAdminsFilter
 from keyboards.base_callback_data import simple_callback
 from keyboards.publish_keyboard import publish_keyboard, check_keyboard
 from loader import dp, bot
@@ -30,7 +30,7 @@ class DataBannersState(StatesGroup):
 
 
 @rate_limit()
-@dp.message_handler(IsPrivate(), BotAdminsFilter(), commands="update_banners_search_map")
+@dp.message_handler(IsPrivate(), BotSuperAdminsFilter(), commands="update_banners_search_map")
 async def get_data_from_firebase(message: types.Message, state: FSMContext):
     msg = await bot.send_message(message.chat.id, "Подключаюсь к Firebase...")
     cred = credentials.Certificate(get_cer_data())

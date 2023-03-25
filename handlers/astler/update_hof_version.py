@@ -11,7 +11,7 @@ from cat.utils.files_utils import save_local_file
 from cat.utils.ftp_utils import upload_file_to_folder
 from cat.utils.json_utils import generate_json_string
 from data.config import HOF_FILE
-from filters import IsPrivate, BotAdminsFilter
+from filters import IsPrivate, BotSuperAdminsFilter
 from loader import dp, bot
 from utils.hof.hof_utils import load_hof_array, HOFItem, encode_hof
 from utils.misc import rate_limit
@@ -71,7 +71,7 @@ async def self_destroy_reply(original_message: types.Message, message_text: str,
 
 
 @rate_limit()
-@dp.message_handler(IsPrivate(), BotAdminsFilter(), commands="update_hof_versions")
+@dp.message_handler(IsPrivate(), BotSuperAdminsFilter(), commands="update_hof_versions")
 async def bot_start(message: types.Message, state: FSMContext):
     msg = await bot.send_message(message.chat.id, "Начинаю загрузку данных HOF...")
 

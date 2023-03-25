@@ -14,7 +14,13 @@ def push_git_data(file_path: str, serializable: Serializable):
     except GithubException:
         repository.create_file(file_path, f"info: {file_path}", json_str)
 
-    save_local_file(file_path, json_str)
+
+def push_git_data(file_path: str, data: str):
+    try:
+        contents = repository.get_contents(file_path)
+        repository.update_file(file_path, f"info: {file_path}", data, contents.sha)
+    except GithubException:
+        repository.create_file(file_path, f"info: {file_path}", data)
 
 
 def get_cached_git(path_to_file: str, fallback_data: Serializable):

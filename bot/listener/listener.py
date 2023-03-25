@@ -43,14 +43,18 @@ async def on_channel_post(client, message: Message):
         return
 
     chat = listener_data.chats_to_listen[message.chat.id]
-    tags = chat.hash_tags
+    tags = chat.hashtag
 
     try:
-        await bot.send_message(chat_id=output_channel_id, text=f"tags {tags}")
+        if tags is not None:
+            await bot.send_message(chat_id=output_channel_id, text=tags)
+
         await bot.forward_message(chat_id=output_channel_id, message_id=message.id, from_chat_id=message.chat.id)
     except Exception as e:
         print(e)
-        await user_app.send_message(chat_id=output_channel_id, text=f"tags {tags}")
+
+        if tags is not None:
+            await bot.send_message(chat_id=output_channel_id, text=tags)
         await user_app.forward_messages(chat_id=output_channel_id, message_ids=message.id, from_chat_id=message.chat.id)
     print(f"[{message.chat.title}] {message.text}")
 

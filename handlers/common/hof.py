@@ -1,13 +1,13 @@
 from aiogram import types
 from aiogram.types import ParseMode
 
-from filters import IsPrivate, BotAdminsFilter
+from filters import IsPrivate, BotSuperAdminsFilter
 from loader import dp, bot
 from utils.hof.hof_utils import load_hof_array
 from utils.misc import rate_limit
 
 @rate_limit()
-@dp.message_handler(IsPrivate(), BotAdminsFilter(), commands="hof")
+@dp.message_handler(IsPrivate(), BotSuperAdminsFilter(), commands="hof")
 async def bot_start(message: types.Message):
     msg = await bot.send_message(message.chat.id, "Начинаю загрузку данных HOF...")
 

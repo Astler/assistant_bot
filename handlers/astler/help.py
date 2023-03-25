@@ -1,13 +1,13 @@
 from aiogram import types
 from aiogram.dispatcher.filters import CommandHelp
 
-from filters import IsPrivate, BotAdminsFilter
+from filters import IsPrivate, BotSuperAdminsFilter
 from loader import dp
 from utils.misc import rate_limit
 
 
 @rate_limit()
-@dp.message_handler(CommandHelp(), IsPrivate(), BotAdminsFilter())
+@dp.message_handler(CommandHelp(), IsPrivate(), BotSuperAdminsFilter())
 async def bot_help(message: types.Message):
     text = [
         'Технические',

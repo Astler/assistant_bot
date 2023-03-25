@@ -1,6 +1,6 @@
 aiogram==2.25.1
 aiohttp==3.8.4
-python-telegram-bot==20.1
+python-telegram-bot==20.2
 python-dotenv==1.0.0
 beautifulsoup4==4.12.0
 simplejson==3.18.4
@@ -13,3 +13,7 @@ cowsay==5.0
 TgCrypto==1.2.5
 aioschedule==0.5.2
 openai==0.27.2
+datasets==2.10.1
+transformers==4.27.3
+torch==2.0.0
+tokenizers==0.13.2
