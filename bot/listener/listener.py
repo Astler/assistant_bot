@@ -46,14 +46,14 @@ async def on_channel_post(client, message: Message):
     tags = chat.hashtag
 
     try:
-        if tags is not None:
+        if tags is not None and len(tags) > 0:
             await bot.send_message(chat_id=output_channel_id, text=tags)
 
         await bot.forward_message(chat_id=output_channel_id, message_id=message.id, from_chat_id=message.chat.id)
     except Exception as e:
         print(e)
 
-        if tags is not None:
+        if tags is not None and len(tags) > 0:
             await bot.send_message(chat_id=output_channel_id, text=tags)
         await user_app.forward_messages(chat_id=output_channel_id, message_ids=message.id, from_chat_id=message.chat.id)
     print(f"[{message.chat.title}] {message.text}")
