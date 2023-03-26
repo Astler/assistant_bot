@@ -1,7 +1,7 @@
 from aiogram import types
 
 from bot.filters.forward_from_reply import ForwardFromReply
-from data.listener_data import get_listener_data, save_listener_data
+from bot.listener.listener_data import get_listener_data, save_listener_data
 from filters import BotSuperAdminsFilter
 from loader import dp
 

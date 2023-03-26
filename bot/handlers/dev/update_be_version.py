@@ -1,5 +1,4 @@
 from aiogram import types
-from aiogram.dispatcher import FSMContext
 
 from filters import IsPrivate, BotSuperAdminsFilter
 from loader import dp
@@ -9,7 +8,7 @@ from utils.misc import rate_limit
 
 @rate_limit()
 @dp.message_handler(IsPrivate(), BotSuperAdminsFilter(), commands="update_be_versions")
-async def manual_update(message: types.Message, state: FSMContext):
+async def manual_update(message: types.Message):
     updating_message = await message.reply("Updating...")
     await be_version_push(await be_version_get())
     await updating_message.delete()

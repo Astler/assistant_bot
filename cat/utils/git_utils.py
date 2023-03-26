@@ -1,3 +1,5 @@
+import json
+
 from github import GithubException
 
 from cat.json.serializable import Serializable
@@ -23,7 +25,21 @@ def push_git_data(file_path: str, data: str):
         repository.create_file(file_path, f"info: {file_path}", data)
 
 
-def get_cached_git(path_to_file: str, fallback_data: Serializable):
+def get_json_data(path_to_file: str, fallback_data=None):
+    try:
+        file = repository.get_contents(path_to_file)
+        contents = file.decoded_content.decode()
+        cer = json.loads(contents)
+    except GithubException:
+        if fallback_data is not None:
+            cer = fallback_data
+        else:
+            cer = {}
+
+    return cer
+
+
+def get_serializable_git(path_to_file: str, fallback_data: Serializable):
     data = fallback_data
 
     try:

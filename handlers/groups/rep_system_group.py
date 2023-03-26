@@ -2,7 +2,7 @@ import json
 
 from aiogram import types
 
-from filters.is_rep_msg import IsRepMsg, positive_rep
+from bot.filters.reputation_filter import ReputationFilter, positive_rep_keywords
 from loader import dp
 from utils.group_data.data import get_group_info, save_group_dict, get_cat_user
 from utils.group_data.user import CatUser
@@ -56,7 +56,7 @@ async def group_rep(message: types.Message):
     await message.reply("\n".join(users_with_rep), parse_mode="Markdown")
 
 
-@dp.message_handler(IsRepMsg())
+@dp.message_handler(ReputationFilter())
 async def rep_msg(message: types.Message):
     source_message = message.reply_to_message
 
@@ -86,7 +86,7 @@ async def rep_msg(message: types.Message):
     mention_change_user = create_user_mention(await message.bot.get_chat_member(chat_id, user_to_update_id))
     mention_sender_user = create_user_mention(await message.bot.get_chat_member(chat_id, user_change_author_id))
 
-    if any(word in message.text for word in positive_rep) or str(message.text) == "+" or str(
+    if any(word in message.text for word in positive_rep_keywords) or str(message.text) == "+" or str(
             message.text) == "➕" or str(message.text) == "❤":
         user_to_update.reputation += 1
         await message.reply(
@@ -106,7 +106,7 @@ async def rep_msg(message: types.Message):
 
 
 async def rep_change_for_self(message: types.Message):
-    if any(word in message.text for word in positive_rep):
+    if any(word in message.text for word in positive_rep_keywords):
         await message.reply("Я тоже себя люблю, но... нет.")
     else:
         await message.reply("Самобичевание не выход D:")

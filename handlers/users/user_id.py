@@ -7,15 +7,6 @@ from utils.user_data.data import delete_simple_commands
 
 
 @rate_limit()
-@dp.message_handler(IsPrivate())
-async def get_my_id(message: types.Message):
-    try:
-        await message.reply(message.forward_from_chat.id)
-    except:
-        await message.reply("not_chat")
-
-
-@rate_limit()
 @dp.message_handler(IsPrivate(), commands=["id"])
 async def get_my_id(message: types.Message):
     await message.answer(f'Ваш id: {message.from_user.id}')

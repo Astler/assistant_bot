@@ -6,7 +6,7 @@ import os
 import aioschedule as aioschedule
 
 from bot.listener.listener import try_to_start_listener
-from loader import bot, app
+from loader import bot
 from utils.minecraft.be_version_updater import be_version_push, be_version_get
 from utils.set_bot_commands import set_default_commands
 

@@ -9,7 +9,7 @@ from pyrogram.types import Message
 
 from cat.utils.telegram_utils import send_telegram_msg_to_me
 from data.config import API_ID, API_HASH, INSTANCE_UNIQUE_NAME
-from data.listener_data import get_listener_data
+from bot.listener.listener_data import get_listener_data
 from loader import bot
 
 output_channel_id = -1001868505373

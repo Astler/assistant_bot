@@ -4,7 +4,7 @@ from aiogram.dispatcher.filters.state import StatesGroup, State
 
 from filters import IsPrivate
 from keyboards.base_callback_data import post_creation_callback
-from keyboards.sticker_menu import sticker_keyboard, generate_post_keyboard
+from keyboards.sticker_menu import generate_post_keyboard
 from loader import dp, bot
 from utils.misc import rate_limit
 from utils.user_data.data import delete_simple_commands

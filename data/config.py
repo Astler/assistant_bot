@@ -39,11 +39,15 @@ if not BOT_TOKEN:
     print('You have forgot to set BOT_TOKEN ' + str(BOT_TOKEN) + '?')
     quit()
 
-
 if not str(os.getenv('PORT')).__contains__("None"):
     WEBAPP_PORT = os.getenv('PORT', default=8000)
 
 CHATS_ENV = os.getenv("CHATS").split("|")
+
+BOT_NAMES = os.getenv('BOT_NAMES').split("|")
+
+
+
 
 chats = [int(admin) for admin in CHATS_ENV]
 
@@ -61,8 +65,7 @@ links_black_list = [
 if LINKS_BLACK_LIST_ENV is not None:
     links_black_list.extend(LINKS_BLACK_LIST_ENV.split("|"))
 
-
-version = "0.4.6.2"
+version = "0.4.7"
 
 changes = """Изменения
 0.2-0.2.2 - Удалил лишнее, поправил троттлер
@@ -145,6 +148,7 @@ Fixed no lowercase cast in rep keywords
 0.4.6 - open ai playground and listener improvements
 0.4.6.1 - clean up
 0.4.6.2 - updated model code, added logic to add and check data
+0.4.7 - removed learning model logic, updated filters
 
 TODO:
 Global user data

@@ -1,9 +1,9 @@
 from aiogram import types
 from aiogram.dispatcher.filters import BoundFilter
 
-from utils.admin_data.data import get_a_list
+from data.dev.data import is_sa
 
 
 class BotSuperAdminsFilter(BoundFilter):
     async def check(self, message: types.Message) -> bool:
-        return get_a_list().__contains__(message.from_user.id)
+        return is_sa(message.from_user.id)

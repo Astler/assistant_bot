@@ -5,7 +5,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from bot.listener.listener import try_to_start_listener, try_to_sign_in
 from filters import BotSuperAdminsFilter
-from loader import dp, bot
+from loader import dp
 
 
 class SignIn(StatesGroup):

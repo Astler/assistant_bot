@@ -1,6 +1,6 @@
 from cat.json.serializable import Serializable
 from cat.utils.files_utils import save_local_json
-from cat.utils.git_utils import push_git_data, get_cached_git
+from cat.utils.git_utils import push_git_data, get_serializable_git
 
 
 class ChatToListenData(Serializable):
@@ -59,7 +59,7 @@ def get_git_listener_data_file():
 
 
 def get_listener_data() -> ListenerData:
-    return get_cached_git(get_git_listener_data_file(), ListenerData())
+    return get_serializable_git(get_git_listener_data_file(), ListenerData())
 
 
 def save_listener_data(data: ListenerData):
