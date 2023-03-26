@@ -1,7 +1,7 @@
 from aiogram import types
 from aiogram.dispatcher.filters import CommandHelp
 
-from filters import IsPrivate, BotSuperAdminsFilter
+from bot.filters import IsPrivate, BotSuperAdminsFilter
 from loader import dp
 from utils.misc import rate_limit
 

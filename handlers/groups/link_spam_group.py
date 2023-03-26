@@ -2,9 +2,9 @@ import asyncio
 
 from aiogram import types
 
+from bot.filters import IsGroup
 from data.config import links_black_list
 from data.dev.data import get_sa
-from filters import IsGroup
 from loader import dp
 from utils.group_data.data import get_blocked_links
 

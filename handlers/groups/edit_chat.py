@@ -5,7 +5,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command, AdminFilter
 from aiogram.dispatcher.filters.state import StatesGroup, State
 
-from filters import IsGroup
+from bot.filters import IsGroup
 from loader import dp, bot
 
 

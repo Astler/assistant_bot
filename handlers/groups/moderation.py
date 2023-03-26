@@ -5,7 +5,7 @@ import re
 from aiogram import types
 from aiogram.dispatcher.filters import Command, AdminFilter
 
-from filters import IsGroup
+from bot.filters import IsGroup
 from loader import dp, bot
 from utils import localization
 

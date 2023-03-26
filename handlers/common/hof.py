@@ -1,7 +1,7 @@
 from aiogram import types
 from aiogram.types import ParseMode
 
-from filters import IsPrivate, BotSuperAdminsFilter
+from bot.filters import BotSuperAdminsFilter, IsPrivate
 from loader import dp, bot
 from utils.hof.hof_utils import load_hof_array
 from utils.misc import rate_limit

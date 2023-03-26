@@ -7,11 +7,11 @@ from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.types import ParseMode
 from aiogram.utils.markdown import escape_md
 
+from bot.filters import BotSuperAdminsFilter, IsPrivate
 from cat.utils.files_utils import save_local_file
 from cat.utils.ftp_utils import upload_file_to_folder
 from cat.utils.json_utils import generate_json_string
 from data.config import HOF_FILE
-from filters import IsPrivate, BotSuperAdminsFilter
 from loader import dp, bot
 from utils.hof.hof_utils import load_hof_array, HOFItem, encode_hof
 from utils.misc import rate_limit

@@ -1,7 +1,7 @@
 from aiogram import types
 from aiogram.dispatcher.filters import AdminFilter
 
-from filters import IsGroup
+from bot.filters import IsGroup
 from keyboards.base_callback_data import bot_group_settings
 from keyboards.bot_settings_group_keyboard import bot_settings_group_keyboard
 from loader import dp, bot

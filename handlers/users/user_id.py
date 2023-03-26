@@ -1,6 +1,6 @@
 from aiogram import types
 
-from filters import IsPrivate
+from bot.filters import IsPrivate
 from loader import dp
 from utils.misc import rate_limit
 from utils.user_data.data import delete_simple_commands

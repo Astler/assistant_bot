@@ -1,6 +1,6 @@
 from aiogram import types
 
-from filters import IsPrivate, BotSuperAdminsFilter
+from bot.filters import IsPrivate, BotSuperAdminsFilter
 from loader import dp
 from utils.minecraft.be_version_updater import be_version_get, be_version_push
 from utils.misc import rate_limit

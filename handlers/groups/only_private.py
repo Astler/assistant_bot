@@ -1,6 +1,6 @@
 from aiogram import types
 
-from filters import IsGroup
+from bot.filters import IsGroup
 from loader import dp
 from utils.group_data.data import get_group_info
 from utils.misc import rate_limit

@@ -7,9 +7,9 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
 from firebase_admin import credentials, firestore
 
+from bot.filters import BotSuperAdminsFilter, IsPrivate
 from cat.utils.git_utils import get_json_data
 from data.config import FTP_URL, FTP_USER, FTP_PASS, APPS_DATA_ROOT_URL, PROJECT_ID, BANNERS_MAP_FILE, CERT_PATH
-from filters import IsPrivate, BotSuperAdminsFilter
 from keyboards.base_callback_data import simple_callback
 from keyboards.publish_keyboard import publish_keyboard, check_keyboard
 from loader import dp, bot

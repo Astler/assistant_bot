@@ -1,6 +1,6 @@
 from aiogram import types
 
-from filters import IsPrivate
+from bot.filters import IsPrivate
 from keyboards.my_channels_keyboard import generate_user_channels_keyboard
 from loader import dp, bot
 from utils.user_data.data import get_user_channels, delete_simple_commands

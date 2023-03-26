@@ -2,7 +2,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
 
-from filters import IsPrivate
+from bot.filters import IsPrivate
 from keyboards.base_callback_data import post_creation_callback
 from keyboards.sticker_menu import generate_post_keyboard
 from loader import dp, bot

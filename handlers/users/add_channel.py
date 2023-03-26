@@ -3,7 +3,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import ForwardedMessageFilter
 from aiogram.dispatcher.filters.state import StatesGroup, State
 
-from filters import IsPrivate
+from bot.filters import IsPrivate
 from keyboards.base_callback_data import cancel_action_callback
 from keyboards.sticker_menu import add_channel_keyboard
 from loader import dp, bot

@@ -3,7 +3,7 @@ import re
 from aiogram import types
 from aiogram.dispatcher.filters import AdminFilter
 
-from filters import IsGroup
+from bot.filters import IsGroup
 from loader import dp
 
 from utils.group_data.data import get_group_info, get_blocked_links, save_group_dict

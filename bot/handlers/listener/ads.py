@@ -2,10 +2,10 @@ import asyncio
 
 from aiogram import types
 
+from bot.filters import BotSuperAdminsFilter
 from bot.filters.forward_from_reply import ForwardFromReply
 from bot.handlers.listener.data.data import advertisement, add_new_data_to_ads_model, not_advertisement
 from cat.utils.telegram_utils import get_message_text
-from filters import BotSuperAdminsFilter
 from loader import dp
 
 

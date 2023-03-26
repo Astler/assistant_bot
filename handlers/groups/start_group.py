@@ -1,7 +1,7 @@
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandStart
 
-from filters import IsGroup
+from bot.filters import IsGroup
 from loader import dp
 
 
