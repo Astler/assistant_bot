@@ -65,7 +65,7 @@ links_black_list = [
 if LINKS_BLACK_LIST_ENV is not None:
     links_black_list.extend(LINKS_BLACK_LIST_ENV.split("|"))
 
-version = "0.4.7.2"
+version = "0.4.7.3"
 
 changes = """Изменения
 0.2-0.2.2 - Удалил лишнее, поправил троттлер
@@ -151,6 +151,7 @@ Fixed no lowercase cast in rep keywords
 0.4.7 - removed learning model logic, updated filters
 0.4.7.1 - fixes
 0.4.7.2 - git push fixes
+0.4.7.3 - listener fixes (mb)
 
 TODO:
 Global user data
