@@ -72,12 +72,12 @@ async def run_pyrogram():
 
 
 async def try_to_start_listener(client: Client = None) -> bool:
+    print("Trying to start listener")
     global user_app, pyro_task
 
     if client is None:
         if user_app.is_connected and not user_app.is_initialized:
             await user_app.disconnect()
-        user_app = Client(INSTANCE_UNIQUE_NAME + " Listener", API_ID, API_HASH)
         await user_app.connect()
     else:
         user_app = client

@@ -4,6 +4,7 @@ from github import GithubException
 
 from cat.json.serializable import Serializable
 from cat.utils.files_utils import save_local_file, save_local_json
+from cat.utils.telegram_utils import send_telegram_msg_to_me
 from loader import repository
 
 
@@ -44,7 +45,8 @@ def get_serializable_git(path_to_file: str, fallback_data: Serializable):
         if len(contents) != 0:
             data = data.from_json_str(contents)
 
-    except GithubException:
+    except GithubException as exception:
+        send_telegram_msg_to_me(f"Exception: {exception} {path_to_file}")
         push_git_serializable_data(path_to_file, data)
 
     save_local_json(path_to_file, data)
