@@ -7,7 +7,7 @@ import aioschedule as aioschedule
 
 from bot.listener.listener import try_to_start_listener
 from loader import bot
-from utils.minecraft.be_version_updater import be_version_push, be_version_get
+from utils.minecraft.minecraft_version_updater import minecraft_version_push, minecraft_versions_get
 from utils.set_bot_commands import set_default_commands
 
 
@@ -19,7 +19,7 @@ async def on_startup(dp):
     logging.info(dp)
 
     await try_to_start_listener()
-    await be_version_push(await be_version_get())
+    await minecraft_version_push(await minecraft_versions_get())
 
     from utils.notify_admins import on_startup_notify
     await on_startup_notify(dp)
@@ -31,7 +31,7 @@ async def on_startup(dp):
 async def combined_task():
     now = datetime.datetime.now()
     if now.minute == 0:
-        await be_version_push(await be_version_get())
+        await minecraft_version_push(await minecraft_versions_get())
 
 
 async def scheduler_combined():

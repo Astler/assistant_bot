@@ -1,3 +1,3 @@
-from .update_be_version import dp
+from .update_minecraft_latest_versions import dp
 
 __all__ = ["dp"]
